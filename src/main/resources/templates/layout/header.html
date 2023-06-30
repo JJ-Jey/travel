@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html xmlns:th="//thymeleaf.org" xmlns:sec="//www.thymeleaf.org/extras/spring-security" >
+<header class="view-size">
+	<div class="wrap">
+		<nav class="flex between">
+		
+			<section>
+				<a href="/">HOME</a>
+			</section>
+			
+			<section>
+				<!-- 메뉴 -->
+				<div class="flex">
+					<a href="/questions">QnA</a>
+				</div>
+			</section>
+			
+			<section class="flex">
+				
+				<!-- 인증이 되지 않은 경우 출력 -->
+				<div sec:authorize="isAnonymous()">
+			  		<a href="/sign/signin">로그인</a>
+			    </div>
+
+				<!-- 인증이 된 경우 출력 sec:authorize="isAuthenticated()" -->
+		        <div class="flex" sec:authorize="isAuthenticated()">
+
+			        <span th:text="${#authentication.name}"></span>
+
+			        <form action="/logout" method="post">
+			        	
+			        	<input type="hidden" th:if="${_csrf}"
+									th:name="${_csrf.parameterName}"
+									th:value="${_csrf.token}"/>
+
+			        	<button>로그아웃</button>
+
+			        </form>
+
+		        </div>
+				
+				<div>
+					<a href="/sign/signup">회원가입</a>
+				</div>
+				
+			</section>		
+		
+		</nav>
+	</div>
+</header>
+</html>

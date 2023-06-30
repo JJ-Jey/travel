@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
+<head>
+    <link rel="stylesheet" href="/css/index.css">
+	<script src="/js/index.js"></script>
+	<script src="/js/visual.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<main>
+	<h1>메인영역</h1>
+	<div class="wrap">
+	
+		<section class="view-size">
+			<p>Index Page</p>
+			
+			<!-- sec:authorize="hasRole('ROLE_ADMIN')" -->
+			<a href="/admin">관리자 페이지</a>
+		</section>
+		
+		<!-- 비주얼 영역 -->
+		<aside id="visual">
+			<h1>비주얼영역</h1>
+			<div class="wrap">
+				<ol class="item-list">
+					<th:block th:each="i : ${#numbers.sequence(1,5)}">
+					<li class="item" >
+						<a href="#" th:style="|background-image: url('/image/visual/v${i}.png');|">[[${i}]]</a>
+					</li>
+					</th:block>
+				</ol>
+				<div class="btn-wrap">
+					<button class="btn prev" onclick="move(-1)">&lt;</button>
+					<button class="btn next" onclick="move(1)">&gt;</button>
+				</div>
+				<ul class="bullet-wrap flex">
+					<li class="bullet" th:each="i : ${#numbers.sequence(1,5)}" th:text="${i}"></li>
+				</ul>
+				<div class="auto-wrap">
+					<button>
+						<span class="material-symbols-outlined" style="display: none;">play_arrow</span>
+						<span class="material-symbols-outlined">stop</span>
+					</button>
+					<span class="txt">
+						<span class="target">1</span>
+						/
+						<span class="tot">5</span>
+					</span>
+				</div>
+			</div>
+		</aside>
+		
+		<h1>예약</h1>
+		<section class="view-size">
+			<div style="border: 1px solid #c9c9c9;">
+				<input class="datepicker" placeholder="가는 날" name="departureDate">
+				<input class="datepicker" placeholder="오는 날" name="arrivalDate">
+			</div>
+		</section>
+		
+		
+		<h1>프로모션</h1>
+		<section class="view-size">
+			
+			<h1>최저가 간편 조회</h1>
+			<section>
+				<div class="flex between">
+					<p>최저가 간편 조회
+					<br>
+					오늘부터 6개월 내 출발하는 항공편의 최저가와 출발일을 간편하게 조회하실 수 있습니다.</p>
+					<a href="#">전체보기 +</a>
+				</div>
+				
+				<div class="flex around">
+					<th:block th:each="i : ${#numbers.sequence(1,3)}">
+						<ul class="event" th:style="|background-image: url('/image/example/vote${i}.jpg');|">
+							<li>상품명</li>
+							<li>상품 가격</li>
+						</ul>
+					</th:block>
+				</div>
+			</section>
+			
+			<h1>이벤트</h1>
+			<section class="view-size">
+				<div class="flex between">
+					<p>이벤트
+					<br>
+					아시아나항공만의 특별한 혜택을 누려보세요.</p>
+					<a href="#">전체보기 +</a>
+				</div>
+				
+				<div class="flex around">
+					<th:block th:each="i : ${#numbers.sequence(4,6)}">
+						<ul class="event" th:style="|background-image: url('/image/example/vote${i}.jpg');|">
+							<li>상품명</li>
+							<li>상품 기간</li>
+						</ul>
+					</th:block>
+				</div>
+			</section>
+		</section>
+		
+		
+		<h1>제휴 서비스 안내</h1>
+		<section class="view-size">
+			<p>
+				제휴 서비스 안내
+			</p>
+			<div>
+				<ul class="flex">
+					<li>
+						<p>마일리지 적립</p>
+						<p>제휴 신용카드 사용하고,<br>마일리지 적립하고!!</p>
+					</li>
+					<li>
+						<p>호텔</p>
+						<p>더 빠르고 스마트한 숙박예약<br>AGODA</p>
+					</li>
+					<li>
+						<p>렌터카</p>
+						<p>전세계 렌터카<br>Rentalcars.com</p>
+					</li>
+					<li>
+						<p>여행자 보험</p>
+						<p>해외여행의 필수품<br>메리츠여행자보험</p>
+					</li>
+					<li>
+						<p>투어&액티비티</p>
+						<p>홈페이지에서 항공권 예약 시<br>마이리얼트립 최대 1만원 할인!</p>
+					</li>
+				</ul>
+			</div>
+		</section>
+		
+		
+		
+		
+		<script>
+			$.datepicker.setDefaults({
+			  dateFormat: 'yy-mm-dd',
+			  prevText: '이전 달',
+			  nextText: '다음 달',
+			  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+			  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+			  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+			  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+			  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+			  showMonthAfterYear: true,
+			  yearSuffix: '년'
+			});
+		  $(function(){
+		    $('.datepicker').datepicker();
+		  })
+		</script>
+	</div>
+</main>
+</html>

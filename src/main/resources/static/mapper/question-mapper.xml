@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.nowon.domain.mapper.QuestionMapper">
+
+	<select id="findAll">
+		select * from question
+		order by no desc
+		limit #{limit} offset #{offset}
+	</select>
+	
+	<insert id="save">
+		insert into question(title, writer, content, answered) values(#{title}, #{writer}, #{content}, #{answered})
+	</insert>
+	
+	<select id="findByNo" resultType="com.green.nowon.domain.entity.QuestionEntity">
+		select * from question where no = #{no}
+	</select>
+	
+	<update id="update">
+		update question set title=#{title}, content=#{content} where no = #{no}
+	</update>
+	
+	<delete id="delete">
+		delete from question where no = #{no}
+	</delete>
+	
+</mapper>
