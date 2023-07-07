@@ -10,29 +10,31 @@
 		
 		<a href="/questions/new">문의하기</a>
 		
-		<table>
-			<tr>
-				<td>글번호</td>
-				<td>제목</td>
-				<td>작성자</td>
-				<td>작성일</td>
-			</tr>
-		
-			<tr th:if="${#lists.isEmpty(list)}">
-				<td colspan="4">
-					<span>문의사항이 존재하지 않습니다.</span>
-				</td>
-			</tr>
-			<tr th:if="${!#lists.isEmpty(list)}" th:each="dto : ${list}">
-				<td th:text="${dto.no}">글번호</td>
-				<td>
-					<a th:href="|/questions/${dto.no}|" th:text="${dto.title}">제목</a>
-				</td>
-				<td th:text="${dto.writer}">작성자</td>
-				<!-- 작성일 출력 시 오류 -->
-				<td th:text="${dto.createdDate}">작성일</td>
-			</tr>
-		</table>
+		<div id="question-list">	
+			<table>
+				<tr>
+					<td>글번호</td>
+					<td>제목</td>
+					<td>작성자</td>
+					<td>작성일</td>
+				</tr>
+			
+				<tr th:if="${#lists.isEmpty(list)}">
+					<td colspan="4">
+						<span>문의사항이 존재하지 않습니다.</span>
+					</td>
+				</tr>
+				<tr th:if="${!#lists.isEmpty(list)}" th:each="dto : ${list}">
+					<td th:text="${dto.no}">글번호</td>
+					<td>
+						<a th:href="|/questions/${dto.no}|" th:text="${dto.title}">제목</a>
+					</td>
+					<td th:text="${dto.writer}">작성자</td>
+					<!-- 작성일 출력 시 오류 -->
+					<td th:text="${dto.createdDate}">작성일</td>
+				</tr>
+			</table>
+		</div>
 		
 		<!-- 페이지 이동 버튼 -->
 		<div th:unless="${#lists.isEmpty(list)}" style="display: flex;">

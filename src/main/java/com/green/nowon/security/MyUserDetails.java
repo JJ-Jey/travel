@@ -12,7 +12,6 @@ import com.green.nowon.domain.entity.MemberEntity;
 import lombok.Getter;
 
 @Getter
-//super의 기본 생성자(NoArgs)가 존재하지 않기 때문에 처음에 빨간줄
 public class MyUserDetails extends User {
 	
 	private static final long serialVersionUID = 1L;
@@ -20,6 +19,8 @@ public class MyUserDetails extends User {
 	private String email;
 	
 	private String name;
+	
+	private long mno;
 
 	public MyUserDetails(MemberEntity entity) {
 		this(entity.getEmail(),
@@ -33,6 +34,8 @@ public class MyUserDetails extends User {
 		this.email = entity.getEmail(); //default: "principal.username" 을 "principal.email"로 바꾸기 위함
 		
 		this.name = entity.getName();
+		
+		this.mno = entity.getNo();
 	}
 
 	private MyUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {

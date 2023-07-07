@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.nowon.domain.mapper.AdminMapper">
+	<select id="findAll" resultType="com.green.nowon.domain.entity.PromotionEntity">
+		select * from promotion
+	</select>
+	
+	<resultMap id="promotionEntity" type="com.green.nowon.domain.entity.PromotionEntity">
+		<id column="pno" property="pno" />
+		<result column="name" property="name"/>
+		<result column="content" property="content"/>
+		<result column="price" property="price"/>
+		<result column="period" property="period"/>
+		<result column="created_date" property="createdDate"/>
+		<result column="updated_date" property="updatedDate"/>
+		
+		<collection property="images" ofType="com.green.nowon.domain.entity.PromotionImageEntity"> 
+			<id column="pino"  property="pino"/>
+			<result column="org_name" property="orgName"/>
+			<result column="new_name" property="newName"/>
+			<result column="created_date" property="createdDate"/>
+			<result column="updated_date" property="updatedDate"/>
+			<result column="pno" property="pno"/>
+			<result column="def_yn" property="defYn"/>
+		</collection>
+	</resultMap>
+	
+	<select id="findAllJoinImage" resultMap="promotionEntity">
+		select p.*,pi.* from 
+		promotion p LEFT JOIN promotion_image pi
+		ON p.pno = pi.pno
+		order by p.pno desc
+	</select>
+	
+	<select id="findByPno" resultType="com.green.nowon.domain.entity.PromotionEntity">
+		select * from promotion where pno = #{pno}
+	</select>
+</mapper>

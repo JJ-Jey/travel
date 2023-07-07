@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
 <head>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
     <link rel="stylesheet" href="/css/index.css">
 	<script src="/js/index.js"></script>
 	<script src="/js/visual.js"></script>
@@ -19,7 +20,7 @@
 			<p>Index Page</p>
 			
 			<!-- sec:authorize="hasRole('ROLE_ADMIN')" -->
-			<a href="/admin">관리자 페이지</a>
+			<a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin">관리자 페이지</a>
 		</section>
 		
 		<!-- 비주얼 영역 -->
@@ -56,10 +57,47 @@
 		
 		<h1>예약</h1>
 		<section class="view-size">
-			<div style="border: 1px solid #c9c9c9;">
+			
+			<a href="/alert">※ 여행 경보</a>
+			
+			<form action="/reservations" method="post">
+			
+				<label for="departure">출발지</label>
+				<select name="departure" id=departure>
+					<option value="0">선택하기</option>
+					<option value="인천">인천</option>
+					<option value="김포">김포</option>
+					<option value="청주">청주</option>
+					<option value="대구">대구</option>
+					<option value="무안">무안</option>
+					<option value="김해">김해</option>
+					<option value="양양">양양</option>
+					<option value="제주">제주</option>
+				</select>
+				
+				<label for="arrival">도착지</label>
+				<select name="arrival" id="arrival">
+					<option value="0">선택하기</option>
+					<option value="워싱턴">워싱턴</option>
+					<option value="런던">런던</option>
+					<option value="도쿄">도쿄</option>
+					<option value="베이징">베이징</option>
+					<option value="하노이">하노이</option>
+				</select>
+				
 				<input class="datepicker" placeholder="가는 날" name="departureDate">
+				
 				<input class="datepicker" placeholder="오는 날" name="arrivalDate">
-			</div>
+				
+				<input placeholder="탑승객 수" name="passenger">
+				
+				<input placeholder="좌석등급" name="grade">
+				
+				<input sec:authorize="isAuthenticated()" type="hidden" name="mno" th:value="${#authentication.getPrincipal().getMno()}">
+				
+				<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				<button>예약하기</button>
+			</form>
 		</section>
 		
 		

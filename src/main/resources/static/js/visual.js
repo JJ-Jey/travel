@@ -4,7 +4,7 @@
 var items;
 var target_idx=0;
 var speed;
-var delay=3000;
+var delay=4000;
 var timmer;
 
 var bullets;
@@ -31,8 +31,14 @@ function playStopClicked(){
 	if(playOrStrop==1)stop();
 }
 
+//마우스 올리면 멈춤
+document.addEventListener("mouseover", stop);
+
+//마우스 빼면 다시 시작
+document.addEventListener("mouseout", auto);
+
 document.addEventListener("visibilitychange", function(){
-	if(document.visibilityState=="hedden"){
+	if(document.visibilityState=="hidden"){
 		stop();
 	} else if(document.visibilityState=="visible"){
 		auto();

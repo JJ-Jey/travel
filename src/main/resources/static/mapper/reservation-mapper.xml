@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.nowon.domain.mapper.ReservationMapper">
+	
+	<insert id="reservation">
+		insert into reservation(arrival, arrival_date, departure, departure_date, grade, passenger, member_no)
+		values(#{arrival}, #{arrivalDate}, #{departure}, #{departureDate}, #{grade}, #{passenger}, #{mno})
+	</insert>
+	
+	<select id="findAll" resultType="com.green.nowon.domain.entity.ReservationEntity">
+		select * from reservation
+	</select>
+	
+</mapper>

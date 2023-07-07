@@ -23,7 +23,7 @@ class ProjectTravelingApplicationTests {
 	//@Test
 	void 관리자계정추가() {
 		memberRepo.save(MemberEntity.builder()
-				.email("admin")
+				.email("admin02")
 				.password(encoder.encode("1111"))
 				.name("관리자")
 				.birth("123456")

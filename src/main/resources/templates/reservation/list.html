@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
+<head>
+</head>
+<main>
+	<h1>메인영역</h1>
+	<div class="wrap view-size">
+		<p>예약확인 페이지</p>
+
+		<div>
+			<table>
+				<tr>
+					<td>예약번호</td>
+					<td>출발일</td>
+					<td>출발지</td>
+					<td>도착일</td>
+					<td>도착지</td>
+					<td>승객수</td>
+					<td>좌석등급</td>
+				</tr>
+			
+				<tr th:if="${#lists.isEmpty(list)}">
+					<td colspan="7">
+						<span>예약 내역이 존재하지 않습니다.</span>
+					</td>
+				</tr>
+				
+				<tr th:if="${!#lists.isEmpty(list)}" th:each="dto : ${list}">
+					<td th:text="${dto.no}">예약번호</td>
+					<td th:text="${dto.departureDate}">출발일</td>
+					<td th:text="${dto.departure}">출발지</td>
+					<td th:text="${dto.arrivalDate}">도착일</td>
+					<td th:text="${dto.arrival}">도착지</td>
+					<td th:text="${dto.passenger}">승객수</td>
+					<td th:text="${dto.grade}">좌석등급</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</main>
+</html>

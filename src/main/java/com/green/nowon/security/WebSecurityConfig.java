@@ -10,12 +10,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-	/*
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return new CustomUserDetailsService();
-	}
-	*/
+
 	@Bean
 	public AuthenticationSuccessHandler mySuccessHandler() {
 		return new MySuccessHandler();
@@ -25,14 +20,13 @@ public class WebSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests(authorize -> authorize
-					.antMatchers("/", "/css/**", "/js/**","/images/**", "/sign/*", "/layout/*", "/questions", "/date-time-picker/**").permitAll()
-					.antMatchers("/board/*", "/registration").hasAnyRole("USER", "ADMIN")
-					.antMatchers("/admin/**").permitAll()//.hasAnyRole("ADMIN")
+					.antMatchers("/", "/css/**", "/js/**","/image/**", "/sign/*", "/layout/*", "/date-time-picker/**", "/alert", "/questions").permitAll()
+					.antMatchers("/board/*", "/reservations", "/questions/search").hasAnyRole("USER", "ADMIN")
+					.antMatchers("/admin/**").hasAnyRole("ADMIN")
 					.anyRequest().authenticated()
 			)
 			.formLogin(login -> login
 					.loginPage("/sign/signin")
-					//.loginProcessingUrl("/login")
 					.usernameParameter("email")
 					.passwordParameter("password")
 					.defaultSuccessUrl("/")
@@ -43,7 +37,6 @@ public class WebSecurityConfig {
 	        		 .logoutUrl("/logout")
 	        		 .logoutSuccessUrl("/")
 	        		 .deleteCookies("JSESSIONID"))
-	         //.csrf(csrf->csrf.disable()
 			;
 			
 		return http.build();

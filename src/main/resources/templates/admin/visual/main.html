@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
+	<head>
+		<meta name="_csrf_parameter" content="${_csrf.parameterName}" />
+		<meta name="_csrf_header" content="${_csrf.headerName}" />
+		<meta name="_csrf" content="${_csrf.token}" />
+		
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<script src="/js/admin/fileupload.js"></script>
+		<link rel="stylesheet" href="/css/admin/fileupload.css"/>
+	</head>
+	<main>
+		<h1>메인영역</h1>
+		<div class="wrap">
+			<p>메인 이미지 관리 페이지</p>
+			
+			
+			
+			
+			<section id="goods-wrte">
+		<h1>메인 이미지 관리</h1>
+		<div class="wrap">
+			<p>메인 이미지 관리 페이지</p>
+			<hr>
+			<form id="form-goods">
+				<ul>
+					<li>
+						<label>메인 이미지</label>
+						<div class="def-img">
+							<span>대표 이미지</span>
+							<div class="img-wrap">
+								<label class="pre-img">
+									<input type="file" onchange="tempUpload(this)">
+								</label>
+								<input type="hidden" class="tempKey" name="tempKey">
+								<input type="hidden" class="orgName" name="orgName">
+								<input type="hidden" class="newName" name="newName">
+								<input type="hidden" class="def" name="def" value="true">
+							</div>
+							<pre><!-- 
+							 -->권장 크기 : 1000 x 1000 (윈도대상 750 x 1000)
+<!--                         -->대표이미지 기준 1000x1000 이상 이미지를 등록하시면, 이미지 확대 기능이 제공됩니다.
+<!--                         -->쇼핑검색에 노출되지 않는 경우 가이드를 확인해주세요.
+							</pre>
+							
+						</div>
+						
+						<div>
+							<span>추가 이미지(최대5장)</span>
+							<div class="add-img flex">
+								<div class="img-wrap">
+									<label class="pre-img">
+										<input type="file" onchange="tempUpload(this)">
+									</label>
+									<input type="hidden" class="tempKey" name="tempKey">
+									<input type="hidden" class="orgName" name="orgName">
+									<input type="hidden" class="newName" name="newName">
+									<input type="hidden" class="def" name="def" value="false">
+								</div>
+							</div>
+							<pre><!-- 
+							 -->권장 크기 : 1000 x 1000 (윈도대상 750 x 1000)
+<!--                         -->대표이미지 기준 1000x1000 이상 이미지를 등록하시면, 이미지 확대 기능이 제공됩니다.
+<!--                         -->쇼핑검색에 노출되지 않는 경우 가이드를 확인해주세요.
+							</pre>
+						</div>
+					</li>
+					
+					<li>
+						<!-- <input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> -->
+						<button type="button" onclick="goodsSummited()">상품등록</button>
+					</li>
+				</ul>
+			</form>
+		</div>
+	</section>
+		
+		
+		
+		</div>
+	</main>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
+
+	<head>
+		
+	</head>
+
+	<main>
+		<h1>메인영역</h1>
+		<div class="wrap view-size">
+			<p>상품 리스트</p>
+			<table>
+				<tr>
+					<td>대표이미지</td>
+					<td>프로모션</td>
+					<td>가격</td>
+					<td>기간</td>
+					<td>작성일</td>
+				</tr>
+			
+				<tr th:if="${#lists.isEmpty(list)}">
+					<td colspan="5">
+						<span>진행중인 프로모션이 존재하지 않습니다.</span>
+					</td>
+				</tr>
+				<tr th:if="${!#lists.isEmpty(list)}" th:each="dto : ${list}">
+					<td>
+						<img alt="img" src="/image/example/vote9.jpg" width="100px">
+					</td>
+					<td>
+						<a th:href="|/admin/flights/${dto.pno}|" th:text="${dto.name}">제목</a>
+					</td>
+					<td th:text="${dto.price}">가격</td>
+					<td th:text="${dto.period}">기간</td>
+					<td th:text="${dto.updatedDate}">작성일</td>
+				</tr>
+			</table>
+		</div>
+	</main>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
+<head>
+</head>
+<main>
+	<h1>메인영역</h1>
+	<div class="wrap view-size">
+		<p>여행 경보 알림</p>
+		
+		<p>※ 'ctrl + f'를 활용해 국가를 찾으실 수 있습니다.</p>
+		
+		<a href="https://www.0404.go.kr/dev/issue_current.mofa">
+			[외교부 홈페이지] 여기를 클릭하면 더 자세한 사항을 살펴보실 수 있습니다.
+		</a>
+		
+		<div>
+			<table>
+				<tr>
+					<td>대륙명</td>
+					<td>국가명</td>
+					<td>경보단계</td>
+					<td>지역유형</td>
+					<td>작성일</td>
+				</tr>
+				<tr th:each="dto : ${json}">
+					<td th:text="${dto.continent_nm}"></td>
+					<td th:text="${dto.country_nm}"></td>
+					<td th:text="${dto.alarm_lvl}"></td>
+					<td th:text="${dto.region_ty}"></td>
+					<td th:text="${dto.written_dt}"></td>
+				</tr>
+			</table>
+			
+			<br>
+			<br>
+			<br>
+			
+			<p>1단계 남색경보 여행유의 신변안전 위험 요인 숙지·대비</p>
+			<p>2단계 황색경보 여행자제 (여행예정자) 불필요한 여행 자제 (체류자) 신변안전 특별유의</p>
+			<p>3단계 적색경보 출국권고 (여행예정자) 여행 취소·연기 (체류자) 긴요한 용무가 아닌 한 출국</p>
+			<p>4단계 흑색경보 여행금지 (여행예정자) 여행금지 준수 (체류자) 즉시 대피·철수</p>
+		</div>
+	</div>
+</main>
+</html>

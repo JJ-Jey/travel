@@ -53,7 +53,7 @@ public class QuestionServiceProcess implements QuestionService {
 		
 		int rowCount = (int)questRepo.count();
 		
-		model.addAttribute("pageData", PageData.create(page, limit, rowCount, 6));
+		model.addAttribute("pageData", PageData.create(page, limit, rowCount, 5));
 	}
 
 }

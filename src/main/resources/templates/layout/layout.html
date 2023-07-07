@@ -7,12 +7,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
         <link rel="stylesheet" href="/css/layout/common.css">
-       <!--  <link rel="stylesheet" href="/css/layout/header.css"> -->
+       	 <link rel="stylesheet" href="/css/layout/header.css">
         <link rel="stylesheet" href="/css/layout/footer.css">
         <script src="/js/footer.js"></script>
         <th:block th:replace="${head}" />
     </head>
-    <!-- <body class="view-size"> -->
     <body>
         <th:block th:replace="~{layout/header}" />
         <th:block th:replace="${main}" />
@@ -20,3 +19,4 @@
         
     </body>
 </html>
+
