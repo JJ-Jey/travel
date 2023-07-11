@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+main > .wrap > .joinin-wrap{
+	width: 520px;
+	height: 600px;
+	margin: 100px auto;
+	box-shadow: 5px 5px 5px 5px gray;
+	padding-top: 30px;
+}
+
+.joinin-wrap > *{
+	margin-top: 20px;
+}
+
+.joinin-wrap > p > input{
+	font-size: 20px;
+	height: 40px;
+	border-bottom: 1px solid #999;
+	margin-top: 20px;
+	margin-left: 120px;
+}
+
+.joinin-wrap > p > button{
+	border: 1px solid #aaa;
+	border-radius: 15px;
+	width: 100px;
+	height: 40px;
+	background-color: white;
+	margin-top: 50px;
+	margin-left: 190px;
+}

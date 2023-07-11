@@ -1,8 +1,25 @@
 @charset "UTF-8";
 
 footer{
-	position: relative;
-	top: 500px;
+	top: 300px;
+	padding-bottom: 100px;
+}
+
+.policy span{
+	color: #777;
+	cursor: pointer;
+}
+
+.chat{
+	position: fixed;
+	bottom: 100px;
+	right: 30px;
+	background-color: #777;
+	padding: 10px 15px;
+}
+
+.chat span{
+	color: white;
 }
 
 .btn_gotop {

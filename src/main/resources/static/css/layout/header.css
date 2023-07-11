@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+header{
+	
+}
+
+#home{
+	margin-top: 30px;
+}
+
+#home .home{
+	font-size: 34px;
+	color: #666;
+	font-weight: 900;
+}
+
+#home .home span{
+	color: #f44;
+	font-size: 34px;
+	font-weight: 900;
+}
+
+#menu{
+	margin-top: 30px;
+	width: 220px;
+}
+
+#menu a{
+	color: #666;
+	font-size: 28px;
+	font-weight: 700;
+}
+
+#member{
+	margin-top: 30px;
+	width: 200px;
+}
+
+#member *{
+	color: #666;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+#login{
+	width: 115px;
+}
+
+#logout{
+	width: 125px;
+}

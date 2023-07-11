@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
 <head>
+	<link rel="stylesheet" href="/css/reservation/list.css">
 </head>
 <main>
 	<h1>메인영역</h1>
 	<div class="wrap view-size">
-		<p>예약확인 페이지</p>
+		<p class="page-title">예약 확인</p>
 
-		<div>
+		<div id="reservation-list">
 			<table>
 				<tr>
 					<td>예약번호</td>
@@ -21,7 +22,7 @@
 				</tr>
 			
 				<tr th:if="${#lists.isEmpty(list)}">
-					<td colspan="7">
+					<td colspan="7" style="text-align: center">
 						<span>예약 내역이 존재하지 않습니다.</span>
 					</td>
 				</tr>
@@ -37,6 +38,7 @@
 				</tr>
 			</table>
 		</div>
+		
 	</div>
 </main>
 </html>

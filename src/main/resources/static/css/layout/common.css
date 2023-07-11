@@ -13,6 +13,9 @@
 	font-size: 16px;
 	letter-spacing: -1px;
  }
+main{
+	margin-top: 50px;
+}
 ol, ul {
 	list-style: none;
 }
@@ -44,6 +47,15 @@ input{
 h1{position: absolute; font: 0; left: -9999px}
 
 .view-size{width: 1240px; margin: 0 auto; position: relative;}
+.page-title{
+	width: 500px; 
+	margin: 0 auto;
+	padding-top: 70px; 
+	font-size: 34px; 
+	font-weight: 700; 
+	text-align: center;
+	color: #444;
+}
 
 .flex{display: flex;}
 .column{flex-direction: column;}

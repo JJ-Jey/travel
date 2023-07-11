@@ -15,14 +15,6 @@
 <main>
 	<h1>메인영역</h1>
 	<div class="wrap">
-	
-		<section class="view-size">
-			<p>Index Page</p>
-			
-			<!-- sec:authorize="hasRole('ROLE_ADMIN')" -->
-			<a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin">관리자 페이지</a>
-		</section>
-		
 		<!-- 비주얼 영역 -->
 		<aside id="visual">
 			<h1>비주얼영역</h1>
@@ -30,7 +22,7 @@
 				<ol class="item-list">
 					<th:block th:each="i : ${#numbers.sequence(1,5)}">
 					<li class="item" >
-						<a href="#" th:style="|background-image: url('/image/visual/v${i}.png');|">[[${i}]]</a>
+						<a href="#" th:style="|background-image: url('/image/visual/v${i}.jpeg');|"></a>
 					</li>
 					</th:block>
 				</ol>
@@ -56,15 +48,18 @@
 		</aside>
 		
 		<h1>예약</h1>
-		<section class="view-size">
+		<section id="reservation-wrap" class="view-size">
 			
-			<a href="/alert">※ 여행 경보</a>
+			<a href="/alert">※ 여행 경보 확인하기</a>
 			
-			<form action="/reservations" method="post">
+			<br>
+			<br>
+			
+			<form class="flex between" id="reservation" action="/reservations" method="post">
 			
 				<label for="departure">출발지</label>
 				<select name="departure" id=departure>
-					<option value="0">선택하기</option>
+					<option value="0">출발지</option>
 					<option value="인천">인천</option>
 					<option value="김포">김포</option>
 					<option value="청주">청주</option>
@@ -77,7 +72,7 @@
 				
 				<label for="arrival">도착지</label>
 				<select name="arrival" id="arrival">
-					<option value="0">선택하기</option>
+					<option value="0">도착지</option>
 					<option value="워싱턴">워싱턴</option>
 					<option value="런던">런던</option>
 					<option value="도쿄">도쿄</option>
@@ -91,7 +86,13 @@
 				
 				<input placeholder="탑승객 수" name="passenger">
 				
-				<input placeholder="좌석등급" name="grade">
+				<label for="grade">좌석등급</label>
+				<select name="grade" id="grade">
+					<option value="0">좌석등급</option>
+					<option value="이코노미">이코노미</option>
+					<option value="비즈니스">비즈니스</option>
+					<option value="퍼스트">퍼스트</option>
+				</select>
 				
 				<input sec:authorize="isAuthenticated()" type="hidden" name="mno" th:value="${#authentication.getPrincipal().getMno()}">
 				
@@ -102,15 +103,16 @@
 		
 		
 		<h1>프로모션</h1>
-		<section class="view-size">
+		<section id="preview" class="view-size">
 			
 			<h1>최저가 간편 조회</h1>
-			<section>
-				<div class="flex between">
-					<p>최저가 간편 조회
-					<br>
-					오늘부터 6개월 내 출발하는 항공편의 최저가와 출발일을 간편하게 조회하실 수 있습니다.</p>
-					<a href="#">전체보기 +</a>
+			<section id="promotion">
+				<div class="section-label flex between">
+					<div>
+						<p class="sub-title">최저가 간편 조회</p>
+						<p>오늘부터 6개월 내 출발하는 항공편의 최저가와 출발일을 간편하게 조회하실 수 있습니다.</p>
+					</div>
+					<a href="">전체보기 +</a>
 				</div>
 				
 				<div class="flex around">
@@ -124,19 +126,20 @@
 			</section>
 			
 			<h1>이벤트</h1>
-			<section class="view-size">
-				<div class="flex between">
-					<p>이벤트
-					<br>
-					아시아나항공만의 특별한 혜택을 누려보세요.</p>
-					<a href="#">전체보기 +</a>
+			<section id="event">
+				<div class="section-label flex between">
+					<div>
+						<p class="sub-title">이벤트</p>
+						<p>아시아나항공만의 특별한 혜택을 누려보세요.</p>
+					</div>
+					<a href="">전체보기 +</a>
 				</div>
 				
 				<div class="flex around">
 					<th:block th:each="i : ${#numbers.sequence(4,6)}">
 						<ul class="event" th:style="|background-image: url('/image/example/vote${i}.jpg');|">
 							<li>상품명</li>
-							<li>상품 기간</li>
+							<li>상품 가격</li>
 						</ul>
 					</th:block>
 				</div>
@@ -145,29 +148,35 @@
 		
 		
 		<h1>제휴 서비스 안내</h1>
-		<section class="view-size">
-			<p>
-				제휴 서비스 안내
-			</p>
-			<div>
-				<ul class="flex">
+		<section id="service">
+			<div id="service-title" class="view-size">
+				<p class="sub-title">제휴 서비스 안내</p>
+				<p>다양한 제휴상품 이용하시고 편안한 여행하세요.</p>
+			</div>
+			<div class="contents view-size">
+				<ul class="flex around">
 					<li>
+						<img alt="img" src="/image/service/card.png" style="width: 80px;">
 						<p>마일리지 적립</p>
 						<p>제휴 신용카드 사용하고,<br>마일리지 적립하고!!</p>
 					</li>
 					<li>
+						<img alt="img" src="/image/service/hotel.png" style="width: 80px;">
 						<p>호텔</p>
 						<p>더 빠르고 스마트한 숙박예약<br>AGODA</p>
 					</li>
 					<li>
+						<img alt="img" src="/image/service/car.png" style="width: 80px;">
 						<p>렌터카</p>
 						<p>전세계 렌터카<br>Rentalcars.com</p>
 					</li>
 					<li>
+						<img alt="img" src="/image/service/shield.png" style="width: 80px;">
 						<p>여행자 보험</p>
 						<p>해외여행의 필수품<br>메리츠여행자보험</p>
 					</li>
 					<li>
+						<img alt="img" src="/image/service/coupon.png" style="width: 80px;">
 						<p>투어&액티비티</p>
 						<p>홈페이지에서 항공권 예약 시<br>마이리얼트립 최대 1만원 할인!</p>
 					</li>

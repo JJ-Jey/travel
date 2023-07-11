@@ -5,27 +5,31 @@
 	<div class="wrap">
 		<nav class="flex between">
 		
-			<section>
-				<a href="/">HOME</a>
+			<section id="home">
+				<a href="/" class="home">
+					<span>J</span>AIR <span>A</span>IRLINES
+				</a>
 			</section>
 			
-			<section>
+			<section id="menu">
 				<!-- 메뉴 -->
 				<div class="flex between">
-					<a href="/questions">QnA</a>
 					<a href="/reservations">예약확인</a>
+					<a href="/questions">QnA</a>
 				</div>
 			</section>
 			
-			<section class="flex">
-				
+			<section id="member" class="flex between">
+			
 				<!-- 인증이 되지 않은 경우 출력 -->
-				<div sec:authorize="isAnonymous()">
+				<div id="login" class="flex between" sec:authorize="isAnonymous()">
+					<p>비회원</p>
 			  		<a href="/sign/signin">로그인</a>
 			    </div>
 
+			<div>
 				<!-- 인증이 된 경우 출력 sec:authorize="isAuthenticated()" -->
-		        <div class="flex" sec:authorize="isAuthenticated()">
+		        <div id="logout" class="flex between" sec:authorize="isAuthenticated()">
 
 			        <span th:text="${#authentication.name}"></span>
 
@@ -40,7 +44,10 @@
 			        </form>
 
 		        </div>
-				
+		        <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin">관리자 페이지</a>
+			</div>
+			
+			
 				<div>
 					<a href="/sign/signup">회원가입</a>
 				</div>

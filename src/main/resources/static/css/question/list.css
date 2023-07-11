@@ -1,99 +1,73 @@
 @charset "UTF-8";
 
-/* list page */
-
-#myboard > .wrap .title{
-	border-top: 2px solid #797979;
-	border-bottom: 1px solid #a9a9a9;
+.enroll{
+	background-color: #f99;
+	display: block;
+	width: 100px;
+	text-align: center;
+	padding: 10px;
+	border-radius: 15px;
+	color: white;
+	margin-bottom: 10px;
+	margin-left: 85%;
 }
 
-#myboard > .wrap .lists > li,
-#myboard > .wrap .title > li{
-	width: 80px;
-	padding: 1em 0;
+#question-list{
+	margin: 100px auto;
+	width: 800px;
+	height: 700px;
 }
 
-#myboard > .wrap .lists > li:nth-of-type(2),
-#myboard > .wrap .title > li:nth-of-type(2){
+#question-list > table tr:first-of-type{
+	border-bottom: 4px double #333 !important;
+}
+
+#question-list > table tr:first-of-type td{
+	text-align: center;
+}
+
+#question-list > table tr td{
+	padding: 20px;
+}
+
+#question-list > table tr{
+	border-bottom: 1px dotted #333;
+}
+
+#question-list > table tr td:first-of-type {
+	width: 100px;
+}
+
+#question-list > table tr td:nth-of-type(2) {
 	width: 400px;
 }
 
-#myboard > .wrap .lists > li:nth-of-type(4),
-#myboard > .wrap .title > li:nth-of-type(4){
-	width: 120px;
-}
-
-#myboard > .wrap .lists > li:nth-of-type(5),
-#myboard > .wrap .title > li:nth-of-type(5){
-	width: 120px;
-}
-
-#myboard > .wrap .none-list{
-	padding: 1em;
-	border-bottom: 1px solid #a9a9a9;
-}
-
-.page-wrap > a{
-	width: 40px;
-	height: 40px;
-	border: 1px solid #a9a9a9;
-	margin: 30px 2px;
-	text-align: center;
-	line-height: 35px;
-	text-decoration: none;
-}
-
-.page-wrap .target{
-	background-color: black;
-	color: white;
-}
-
-
-/* detail page */
-
-#detail > .wrap dl{
-	padding: 1em 0;
-	border: 1px solid #a9a9a9;
-	border-top: none;
-	margin-bottom: 0;
-}
-
-#detail > .wrap dl:first-of-type{
-	border-top: 1px solid #a9a9a9;
-}
-
-#detail > .wrap form dl:last-of-type > dd{
-	padding: 1em;
-	background-color: #e9e9e9;
-	margin: 1em 1em 0 1em;
-}
-
-#detail > .wrap dl > dt{
-	width: 120px;
-	color: #777;
-	margin-left: 1em;
-}
-
-.detail-update{
-	display: none;
-}
-
-.registration{
-	display: block;
+#question-list > table tr td:nth-of-type(3) {
 	width: 100px;
-	height: 30px;
-	padding: 0 10px;
-	border: 1px solid #a9a9a9;
-	border-radius: 5px;
-	color: white;
-	background-color: #666;
 }
 
-.registration:hover{
-	background-color: #000;
+#question-list > table tr td:nth-of-type(4) {
+	width: 200px;
 }
 
+/* 버튼 */
 
+.page-btn{
+	margin-left: 600px;
+}
 
+.page-btn a{
+	display: inline-flex;
+	padding-top: 12px;
+	padding-left: 18px;
+	width: 50px;
+	height: 50px;
+	border: 1px solid black;
+	border-radius: 50%;
+	margin: 0 3px;
+}
 
-
+.page-btn a:hover {
+	background-color: #333;
+	color: #fff;
+}

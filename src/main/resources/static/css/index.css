@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-main section{
-	margin-top: 100px;
-	border-top: 1px solid #a9a9a9;
-}
 
 /******************************************** visual */
 #visual>.wrap{
@@ -49,19 +45,26 @@ main section{
 
 #visual>.wrap .btn-wrap .btn{
 	position: absolute;
-	width: 100px;
-	height : 100px;
+	width: 30px;
+	height : 30px;
 	top: calc(50% - 50px);
 	display:inline-flex;
 	align-items:center;
 	text-align: center;
 	z-index: 2;
+	border: 1px solid #333;
+	border-radius: 50%;
+	background-color: #333;
+	color: white;
+	font-weight: 900;
+	opacity: 0.7;
+	padding-left: 7px;
 }
 #visual>.wrap .btn-wrap .btn.prev{
-	left: 0;
+	left: 30px;
 }
 #visual>.wrap .btn-wrap .btn.next{
-	right: 0;
+	right: 30px;
 }
 
 #visual>.wrap .bullet-wrap{
@@ -106,11 +109,7 @@ main section{
 }
 
 
- .event{
-	position: relative;
-	width: 100px;
-	height: 100px;
-}
+
 /*
 .event li{
 	position: absolute;
@@ -123,9 +122,8 @@ main section{
 	transition: transform 0.5s;
 } */
 .event{
-	border: 1px solid #a9a9a9;
-	width: 200px;
-	height: 300px;
+	width: 300px;
+	height: 450px;
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -135,7 +133,127 @@ main section{
 	cursor: pointer;
 }
 .event li{
-	background-color: red;
-	margin-top: 45%;
+	background-color: rgba(0,0,0,0.7);
+	color: #fff;
+	font-size: 24px;
+	font-weight: 700;
+	padding: 5px 0;
+}
+
+#reservation-wrap{
+	margin-top: 50px;
+}
+
+#reservation > *{
+	width: 130px;
+}
+
+
+
+
+/* reservation */
+#reservation-wrap{
+	width: 1200px;
+	height: 160px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px 5px #a9a9a9;
+	padding: 30px;
+}
+
+#reservation > input{
+	border-bottom: 1px solid #777;
+	color: #777;
+	font-weight: 500;
+}
+
+#reservation label{
+	display: none;
+}
+
+#reservation select{
+	appearance: none;
+	border: none;
+	border-bottom: 1px solid #777;
+	color: #777;
+	font-weight: 500;
+}
+
+#reservation button {
+	background-color: #f55;
 	color: white;
+	padding: 5px 10px;
+	border-radius: 10px;
+	font-weight: 500;
+}
+
+
+
+/* preview */
+
+#preview section{
+	margin-top: 150px;
+}
+
+#preview section > div{
+	margin-top: 50px;
+}
+
+.section-label > a{
+	border: 1px solid #666;
+	border-radius: 150px;
+	display: block;
+	width: 100px;
+	height: 35px;
+	padding-top: 4px;
+	padding-left: 15px;
+}
+
+.sub-title{
+	font-size: 32px;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+
+
+
+/* sevice */
+
+#service{
+	margin-top: 150px;
+	height: 460px;
+	background-image: url("/image/service-background.jpeg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#service-title{
+	padding-left: 50px;
+	padding-top: 40px;
+	
+}
+
+#service > div{
+	margin-top: 40px;
+}
+
+#service > div > ul > li{
+	width: 200px;
+	height: 250px;
+	background-color: white;
+	opacity: 0.8;
+}
+
+#service > div > ul > li:hover{
+	cursor: pointer;
+}
+
+#service > div > ul > li > *{
+	font-weight: 500;
+	margin-top: 20px;
+	text-align: center;
+}
+
+#service > div > ul > li > img{
+	margin-left: 30%;
 }

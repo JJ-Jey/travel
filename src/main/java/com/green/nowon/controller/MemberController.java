@@ -69,7 +69,7 @@ public class MemberController {
 	@PostMapping("/reservations")
 	public String reservationSave(ReservationSaveDTO dto) {
 		service.reservationProcess(dto);
-		return "redirect:/";
+		return "redirect:/reservations";
 	}
 
 }

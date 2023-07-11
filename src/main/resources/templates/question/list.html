@@ -2,15 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
 <head>
+	<link rel="stylesheet" href="/css/question/list.css">
 </head>
 <main>
 	<h1>메인영역</h1>
 	<div class="wrap view-size">
-		<p>QnA 게시판</p>
+		<p class="page-title">QnA</p>
 		
-		<a href="/questions/new">문의하기</a>
 		
 		<div id="question-list">	
+
+		<a class="enroll" href="/questions/new">문의하기</a>
+
 			<table>
 				<tr>
 					<td>글번호</td>
@@ -20,7 +23,7 @@
 				</tr>
 			
 				<tr th:if="${#lists.isEmpty(list)}">
-					<td colspan="4">
+					<td colspan="4" style="text-align: center">
 						<span>문의사항이 존재하지 않습니다.</span>
 					</td>
 				</tr>
@@ -37,19 +40,19 @@
 		</div>
 		
 		<!-- 페이지 이동 버튼 -->
-		<div th:unless="${#lists.isEmpty(list)}" style="display: flex;">
-				<div th:if="${pageData.from gt 1}">
-					<a th:href="|/questions?page=${pageData.from-1}|">&lt;</a>
-				</div>
-				<div>
-					<span th:each="page : ${#numbers.sequence(pageData.from,pageData.to)}">
-						<a  th:href="|/questions?page=${page}|" th:text="${page}">페이지번호</a>
-					</span>
-				</div>
-				<div th:if="${pageData.to lt pageData.tot}">
-					<a  th:href="|/questions?page=${pageData.to+1}|">&gt;</a>
-				</div>
+		<div th:unless="${#lists.isEmpty(list)}" class="page-btn flex">
+			<div th:if="${pageData.from gt 1}">
+				<a th:href="|/questions?page=${pageData.from-1}|">&lt;</a>
 			</div>
+			<div>
+				<span th:each="page : ${#numbers.sequence(pageData.from,pageData.to)}">
+					<a th:href="|/questions?page=${page}|" th:text="${page}">페이지번호</a>
+				</span>
+			</div>
+			<div th:if="${pageData.to lt pageData.tot}">
+				<a th:href="|/questions?page=${pageData.to+1}|">&gt;</a>
+			</div>
+		</div>
 		
 	</div>
 </main>
