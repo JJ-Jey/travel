@@ -21,7 +21,7 @@ public class WebSecurityConfig {
 		http
 			.authorizeRequests(authorize -> authorize
 					.antMatchers("/", "/css/**", "/js/**","/image/**", "/sign/*", "/layout/*", "/date-time-picker/**", "/alert", "/questions").permitAll()
-					.antMatchers("/board/*", "/reservations", "/questions/search").hasAnyRole("USER", "ADMIN")
+					.antMatchers("/board/*", "/reservations", "/questions/search", "/rest-boards/*", "/kakaoPay/*", "/kakaopay/*").hasAnyRole("USER", "ADMIN")
 					.antMatchers("/admin/**").hasAnyRole("ADMIN")
 					.anyRequest().authenticated()
 			)

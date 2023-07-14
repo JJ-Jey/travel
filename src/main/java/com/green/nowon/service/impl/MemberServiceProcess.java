@@ -43,7 +43,7 @@ public class MemberServiceProcess implements MemberService {
 		UserDetails userDetail = (UserDetails) principal; 
 		String email = userDetail.getUsername(); 
 		long no = memberRepo.findByEmail(email).orElseThrow().getNo();
-		 
+		 System.out.println(no);
 		resMapper.reservation(dto);
 	}
 
@@ -54,8 +54,13 @@ public class MemberServiceProcess implements MemberService {
 	}
 
 	@Override
-	public void findMember(int sessionId) {
-		// TODO Auto-generated method stub
+	public void findMember(Model model) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetails userDetail = (UserDetails) principal; 
+		String email = userDetail.getUsername(); 
+		long mno = memberRepo.findByEmail(email).orElseThrow().getNo();
+		
+		model.addAttribute("list", resMapper.findByMno(mno));
 		
 	}
 	

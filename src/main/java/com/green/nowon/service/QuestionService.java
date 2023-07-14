@@ -3,6 +3,8 @@ package com.green.nowon.service;
 import org.springframework.ui.Model;
 
 import com.green.nowon.domain.dto.QuestionSaveDTO;
+import com.green.nowon.domain.dto.QuestionSearchDTO;
+import com.green.nowon.domain.dto.ReviewDTO;
 import com.green.nowon.domain.entity.QuestionEntity;
 
 public interface QuestionService {
@@ -16,5 +18,9 @@ public interface QuestionService {
 	void delete(long no);
 
 	void findAllProcess(Model model, int page);
+
+	void reviewSave(long no, ReviewDTO dto);
+
+	void findByQuery(Model model, QuestionSearchDTO dto);
 
 }

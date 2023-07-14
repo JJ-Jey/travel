@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org">
+<ul>
+	<li class="flex">
+		<div>글번호</div>
+		<div>제목</div>
+		<div>조회수</div>
+		<div>작성자</div>
+		<div>작성일</div>
+	</li>
+	<li th:each="dto:${list}"  class="flex" >
+		<div th:text="${dto.no}">글번호</div>
+		<div th:text="${dto.subject}">제목</div>
+		<div th:text="${dto.readCount}">조회수</div>
+		<div th:text="${dto.writer}">작성자</div>
+		<div th:text="${dto.updatedDate}">작성일</div>
+	</li>
+</ul>
+<div id="page-wrap" class="flex">
+	<ul th:if="${pd.from>1}">
+		<li th:value="${pd.from-1}">
+			<a class="box" href="#" >&lt;</a>
+		</li>
+	</ul>
+	<ol class="flex">
+		<li th:each="pno:${#numbers.sequence(pd.from,pd.to)}" th:value="${pno}" >
+			<a class="box" href="#" th:text="${pno}"></a>
+		</li>
+	</ol>
+	<ul th:if="${pd.to < pd.tot}">
+		<li th:value="${pd.to+1}">
+			<a class="box" href="#" >&gt;</a>
+		</li>
+	</ul>
+</div>
+<script type="text/javascript">
+	$("#board-list").find("a").click(function(event){
+		event.preventDefault();
+		alert($(this).parent().attr("value"));
+		btnSearchClicked($(this).parent().attr("value"));
+	});
+</script>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
+<head>
+	<link rel="stylesheet" href="/css/question/list.css">
+</head>
+<main>
+	<h1>메인영역</h1>
+	<div class="wrap view-size">
+		<p class="page-title">QnA</p>
+		
+		<div>
+			<form id="form-search" action="/questions/question-search">
+				<select name="columnName">
+					<option value="1" >제목</option>
+					<option value="2" >내용</option>
+					<option value="4" >작성자</option>
+					<option value="3" >제목+내용</option>
+					<option value="5" >제목+작성자</option>
+					<option value="6" >내용+작성자</option>
+					<option value="7" >제목+내용+작성자</option>
+				</select>
+				<input type="search" name="query" placeholder="검색어를 입력하세요.">
+				<button id="btn-search">검색</button>
+			</form>
+		</div>
+		
+		
+		<div id="question-list">	
+
+		<a class="enroll" href="/questions/new">문의하기</a>
+
+			<table>
+				<tr>
+					<td>글번호</td>
+					<td>제목</td>
+					<td>작성자</td>
+					<td>작성일</td>
+				</tr>
+			
+				<tr th:if="${#lists.isEmpty(list)}">
+					<td colspan="4" style="text-align: center">
+						<span>문의사항이 존재하지 않습니다.</span>
+					</td>
+				</tr>
+				<tr th:if="${!#lists.isEmpty(list)}" th:each="dto : ${list}">
+					<td th:text="${dto.no}">글번호</td>
+					<td>
+						<a th:href="|/questions/${dto.no}|" th:text="${dto.title}">제목</a>
+					</td>
+					<td th:text="${dto.writer}">작성자</td>
+					<!-- 작성일 출력 시 오류 -->
+					<td th:text="${dto.createdDate}">작성일</td>
+				</tr>
+			</table>
+		</div>
+		<!-- 
+		페이지 이동 버튼
+		<div th:unless="${#lists.isEmpty(list)}" class="page-btn flex">
+			<div th:if="${pageData.from gt 1}">
+				<a th:href="|/questions?page=${pageData.from-1}|">&lt;</a>
+			</div>
+			<div>
+				<span th:each="page : ${#numbers.sequence(pageData.from,pageData.to)}">
+					<a th:href="|/questions?page=${page}|" th:text="${page}">페이지번호</a>
+				</span>
+			</div>
+			<div th:if="${pageData.to lt pageData.tot}">
+				<a th:href="|/questions?page=${pageData.to+1}|">&gt;</a>
+			</div>
+		</div>
+		 -->
+	</div>
+</main>
+</html>

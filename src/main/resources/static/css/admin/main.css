@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.wrap > div{
+	margin-top: 50px;
+	text-align: center;
+}
+
+.wrap > div > a{
+	font-size: 20px;
+	font-weight: 500;
+}
+
+.wrap > div > a:hover {
+	border-bottom: 2px solid #666;
+}

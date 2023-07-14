@@ -1,18 +1,19 @@
 package com.green.nowon.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.green.nowon.domain.dto.MemberSaveDTO;
 import com.green.nowon.domain.dto.ReservationSaveDTO;
 import com.green.nowon.domain.entity.MemberEntity;
+import com.green.nowon.domain.repository.MemberEntityRepository;
 import com.green.nowon.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,8 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 	
 	private final MemberService service;
+	
+	private final MemberEntityRepository repository;
 	
 	@GetMapping("/sign/signup")
 	public String joinin() {
@@ -43,25 +46,32 @@ public class MemberController {
 		return "redirect:/sign/signin";
 	}
 	
+	@ResponseBody
+	@PostMapping("/sign/email-check")
+	public String emailCheck(String email) {
+		
+		//select * from member where email="?"
+		Optional<MemberEntity> result = repository.findByEmail(email);
+		
+		//입력한 이메일 정보로 DB 조회했더니 존재하지 않음: 사용 가능한 이메일
+		if(result.isEmpty()) {
+			return "사용 가능한 이메일입니다.";
+		}
+
+		//그렇지 않으면 사용 불가능한 이메일
+		return "사용 불가능한 이메일입니다.";
+	}
+	
 	//@GetMapping("/reservations")
-	/*
-	 * public String reservationList(Model model) { service.findAll(model); return
-	 * "reservation/list"; }
-	 */
+	public String reservationList(Model model) { 
+		service.findAll(model); 
+		return "reservation/list"; 
+	}
+	 
 	
 	@GetMapping("/reservations")
-	public String myReservationList(Model model, HttpSession session) {
-		
-		System.out.println(session);
-		System.out.println(session.getId());
-		MemberEntity member = (MemberEntity) session.getAttribute("loginUser");
-		System.out.println(member);
-		//String memberId = member.getEmail();
-		//System.out.println(memberId);
-		
-		
-		
-		//service.findMember(sessionId);
+	public String myReservationList(Model model) {
+		service.findMember(model);
 		
 		return "reservation/list";
 	}

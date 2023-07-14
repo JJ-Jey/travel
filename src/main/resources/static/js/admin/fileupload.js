@@ -1,45 +1,45 @@
 /**
  * 
  */
-
-
 function goodsSummited(){
-		
 	var data=$("#form-goods").serialize();
-	//console.log(data);
+	
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(header, token);
+	});
+	
+	console.log(data);
 	$.ajax({
 		url:"/admin/visuals/img",
 		type:"post",
 		data: data,
 		success: function(result){
-			console.log(result);
+			$("a[href='/admin/goods/new']").trigger("click");
 		}
 	});
 	
 }
  
  function tempUpload(fileEl){
-	 console.log('이미지 임시 업로드 성공?');
+	 console.log($(fileEl));
 	 var fileData=$(fileEl)[0].files[0];
 	 var formData = new FormData();
 	 formData.append("temp", fileData);
 	 
-	 var token = $("meta[name='_csrf']").attr("content");
-	 var header = $("meta[name='_csrf_header']").attr("content");
-	 
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(header, token);
+	});
 	 $.ajax({
-		 beforeSend:function(xhr) {
-			if(token && header) {
-            xhr.setRequestHeader(header, token);
-         	}
-		 },
 		 url:"/admin/visuals/temp-img",
 		 type:"POST",
 		 contentType: false,
 		 processData: false,
 		 data: formData,
 		 success: function(resultMap){
-			 console.log("경로: " + resultMap.imgUrl);
 			 $(fileEl).parent().css("background-image",`url(${resultMap.imgUrl})`);
 			 $(fileEl).parents(".img-wrap").find(".orgName").val(resultMap.orgName);
 			 $(fileEl).parents(".img-wrap").find(".newName").val(resultMap.newName);
@@ -72,5 +72,4 @@ function goodsSummited(){
 			
 		 }
 	  });
-	  console.log('이미지 임시 업로드 성공!');
  }

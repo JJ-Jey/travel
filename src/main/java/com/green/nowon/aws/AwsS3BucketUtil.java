@@ -21,7 +21,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-//@Component
+@Component
 public class AwsS3BucketUtil {
 	
 	private final AmazonS3Client client;
@@ -32,7 +32,7 @@ public class AwsS3BucketUtil {
 	@Value("${cloud.aws.s3.temp-path}")
 	private String tempPath;
 	
-	@Value("${cloud.aws.s3.uoload-path}")
+	@Value("${cloud.aws.s3.upload-path}")
 	private String uploadPath;
 
 	//temp 경로에 이미지 업로드

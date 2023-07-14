@@ -19,6 +19,9 @@
 				<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 				<button>로그인</button>
 			</p>
+			<p th:if="${param.error}" style="color: red; text-align: center; margin-top: 40px;">
+				아이디가 존재하지 않거나 비밀번호가 일치하지 않습니다.
+			</p>
 		</form>
 	</div>
 </main>

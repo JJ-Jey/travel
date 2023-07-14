@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.nowon.mybatis.mapper.ReviewMapper">
+	<insert id="save" parameterType="com.green.nowon.domain.dto.ReviewDTO">
+		insert into review(writer, content, pno) values(#{ReviewDTO.writer}, #{ReviewDTO.content}, #{ReviewDTO.pno})
+	</insert>
+	<select id="findByPno" resultType="com.green.nowon.domain.dto.ReviewDTO">
+		select * from review where pno = #{pno}
+	</select>
+</mapper>

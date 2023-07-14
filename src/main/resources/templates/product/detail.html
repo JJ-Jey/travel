@@ -12,6 +12,8 @@
 		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 		
+		<link rel="stylesheet" href="/css/board/list.css">
+		
 		<!-- jquery summernote 사용하기 -->
 		<script type="text/javascript">
 			$(function(){
@@ -37,43 +39,34 @@
 		<div class="warp view-size">
 		
 		<section id="detail">
-			<h1>프로모션 내용</h1>
+			<h1>게시글 내용</h1>
 			<div class="wrap">
-				<p>프로모션 정보</p>
+				<p class="tit">상품 정보</p>
 				
 				<dl class="flex">
-					<dt>프로모션 번호</dt>
+					<dt>상품번호</dt>
 					<dd th:text="${detail.pno}"></dd>
 				</dl>
-				
 				<dl class="flex">
-					<dt>프로모션</dt>
-					<dd th:text="${detail.name}"></dd>
-				</dl>
-				<dl class="flex">
-					<dt>가격</dt>
-					<dd th:text="${detail.price}"></dd>
-				</dl>
-				<dl class="flex">
-					<dt>기간</dt>
-					<dd th:text="${detail.period}"></dd>
+					<dt>판매자</dt>
+					<dd th:text="${detail.seller}"></dd>
 				</dl>
 				<dl class="flex">
 					<dt>등록일</dt>
-					<dd th:text="${detail.updatedDate}"></dd>
+					<dd th:text="${detail.createdDate}"></dd>
 				</dl>
 				
 				
-				<form th:action="|/admin/flights/${detail.pno}|" method="post">
+				<form th:action="|/product/${detail.pno}|" method="post">
 				
 					<dl class="flex">
 						<dt>제목</dt>
 						<dd>
 							<div class="detail-default">
-								<span th:text="${detail.name}"></span>
+								<span th:text="${detail.title}"></span>
 							</div>
 							<div class="detail-update">
-								<input type="text" name="name" th:value="${detail.name}">
+								<input type="text" name="title" th:value="${detail.title}">
 							</div>
 						</dd>
 					</dl>
@@ -90,7 +83,6 @@
 						</dd>
 					</dl>
 
-					
 					<dl class="flex">
 						<dt>상품 이미지</dt>
 						<dd>
@@ -105,7 +97,6 @@
 						</dd>
 					</dl>
 					
-					 
 					<dl>
 						<dt>상세 정보</dt>
 						<dd>
@@ -123,18 +114,59 @@
 					</div>
 				</form>
 				
+				<section class="detail-default">
+					<!--                       댓글                       -->
+					<p class="tit">리뷰</p>
+	
+					<div class="wrap" th:each="review : ${review}">
+						
+						<dl class="flex">
+							<dt>작성자</dt>
+							<dd th:text="${review.writer}"></dd>
+							<dd th:text="|(${review.createdDate})|"></dd>
+						</dl>
+	
+						<dl class="flex">
+							<dd th:text="${review.content}"></dd>
+						</dl>
+					</div>
+					
+					
+					<!--                       댓글 입력                    -->
+					<form th:action="|/products/${detail.pno}/review|" method="post">
+						<input type="text" name="writer" th:value="${#authentication.name}" disabled="disabled" required="required">
+						<input type="text" name="content" placeholder="댓글 입력" required="required">
+						
+						<button type="submit">댓글 등록</button>
+					</form>
+				</section>
+				
+				
+				
 				<div class="detail-default flex center">
 					<a href="/products">
 						<button type="button">목록</button>
 					</a>
 					
-					<button type="button" onclick="clickedBtnUpdate()">수정</button>
+					<!-- onclick 속성은 ()호출 형식으로 입력하기 -->
+					<th:block th:if="${#authentication.name == detail.seller}">
+						<button type="button" onclick="clickedBtnUpdate()">수정</button>
+					</th:block>
 
-					<form th:action="|/admin/flights/${detail.pno}|" method="post">
-						<input type="hidden" name="_method" value="DELETE">
-						<button type="submit">삭제</button>
-					</form>
-	
+					<th:block th:if="${#authentication.name == detail.seller}">
+						<form th:action="|/products/${detail.pno}|" method="post">
+							<input type="hidden" name="_method" value="DELETE">
+							<button type="submit">삭제</button>
+						</form>
+					</th:block>
+					
+					<!-- 관리자 삭제 버튼 -->
+					<th:block sec:authorize="hasRole('ROLE_ADMIN')">
+						<form th:action="|/products/${detail.pno}|" method="post">
+							<input type="hidden" name="_method" value="patch">
+							<button type="submit">삭제</button>
+						</form>
+					</th:block>
 				</div>
 			</div>
 		</section>

@@ -13,6 +13,6 @@ public interface MemberService {
 
 	void findAll(Model model);
 
-	void findMember(int sessionId);
+	void findMember(Model model);
 
 }

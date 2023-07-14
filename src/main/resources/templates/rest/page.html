@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="//www.thymeleaf.org"
+	th:replace="~{layout/layout :: basic(~{::head}, ~{::main})}">
+	<head>
+		<meta name="_csrf_parameter" content="${_csrf.parameterName}" />
+		<meta name="_csrf_header" content="${_csrf.headerName}" />
+		<meta name="_csrf" content="${_csrf.token}" />
+		
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<script src="/js/rest.js"></script>
+		<link rel="stylesheet" href="/css/rest-baord.css">
+	</head>
+	<main>
+		<h1>메인영역</h1>
+		<div class="wrap">
+			<p>비동기 게시글 페이지</p>
+		</div>
+		<div>
+			<form id="form-search">
+				<select name="columnName">
+					<option value="1" >제목</option>
+					<option value="2" >내용</option>
+					<option value="4" >작성자</option>
+					<option value="3" >제목+내용</option>
+					<option value="5" >제목+작성자</option>
+					<option value="6" >내용+작성자</option>
+					<option value="7" >제목+내용+작성자</option>
+				</select>
+				<input type="search" name="query" placeholder="검색어를 입력하세요">
+				<button type="button" id="btn-search">검색</button>
+			</form>
+		</div>
+		<div id="board-list">
+			list.html 삽입
+		</div>
+	</main>
+</html>

@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
 <head>
+	<script src="/js/admin/payment.js"></script>
 	<link rel="stylesheet" href="/css/reservation/list.css">
 </head>
 <main>
@@ -28,7 +29,10 @@
 				</tr>
 				
 				<tr th:if="${!#lists.isEmpty(list)}" th:each="dto : ${list}">
-					<td th:text="${dto.no}">예약번호</td>
+					<td>
+						<input class="check" type="checkbox">
+						<span th:text="${dto.no}">예약번호</span>
+					</td>
 					<td th:text="${dto.departureDate}">출발일</td>
 					<td th:text="${dto.departure}">출발지</td>
 					<td th:text="${dto.arrivalDate}">도착일</td>
@@ -37,8 +41,13 @@
 					<td th:text="${dto.grade}">좌석등급</td>
 				</tr>
 			</table>
-		</div>
 		
+			<form id="pay" method="post" action="/kakaoPay">
+				<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+			    <button id="check_module">결제하기</button>
+			</form>
+			
+		</div>
 	</div>
 </main>
 </html>

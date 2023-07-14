@@ -1,0 +1,129 @@
+@charset "UTF-8";
+
+/* body{
+	width: 460px;
+	margin: 0 auto;
+} */
+
+#signup-form{
+	width: 500px;
+	margin: 0 auto;
+}
+
+form > .wrap .input-box li input{
+	width: 100%;
+	height: 60px;
+	margin-top: 40px;
+	border-radius: 5px;
+	font-size: 14px;
+	padding-left: 10px;
+	border: 1px solid #999;
+}
+
+form > .wrap ul .msg{
+	display: none;
+	font-size: 12px;
+}
+
+form > .wrap > div{
+	text-align: left;
+	margin-top: 25px;
+}
+
+form > .wrap > div > .agr-box{
+	border: 1px solid #ccc;
+	color: #666;
+	font-size: 12px;
+	margin-top: 15px;
+	padding: 16px;
+	width: 100%;
+	text-align: left;
+}
+
+form > .wrap .input-box > li > p{
+	color: red;
+	font-size: 12px;
+	text-align: left;
+	display: none;
+}
+
+form > .wrap .input-box > li > input:focus{
+	background-color: #f4fff8;
+}
+
+form > .wrap .input-box > li > input:focus + p{
+	display: block;
+}
+
+form > .wrap > div > a{
+	text-decoration: underline;
+}
+
+form > p{
+	color: red;
+	font-size: 12px;
+	text-align: center;
+	margin-top: 30px;
+}
+
+form > .wrap::after {
+	content: "";
+	border-top: 1px solid #999;
+	width: 100%;
+	display: inline-block;
+	margin: 30px auto 0;
+}
+
+form > .submit{
+	margin-top: 40px;
+	width: 100%;
+	height: 60px;
+	border-radius: 5px;
+	background-color: #f99;
+	color: white;
+	font-size: 24px;
+	font-weight: 700;
+}
+
+form > .submit:hover{
+	background-color: red;
+}
+
+
+.check-box input:checked + label::before{
+	background-color: #f99;
+	color: #fff;
+}
+
+.check-box input[type=checkbox]{
+	display: none;
+}
+
+.check-box label{
+	display: flex;
+	line-height: 1;
+	height: 30px;
+	align-items: center;
+}
+
+.check-box label::before{
+	content: "\2713";
+	font-size: 14px;
+	font-weight: 900;
+	color: #f99;
+	text-align: center;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	border: 1px solid #f99;
+	margin-right: 5px;
+}
+
+.birth-box{
+}
+
+.inpt-birth{
+	width: 150px;
+}
+

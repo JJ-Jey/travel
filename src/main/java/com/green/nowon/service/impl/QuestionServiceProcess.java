@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.green.nowon.domain.dto.QuestionSaveDTO;
+import com.green.nowon.domain.dto.QuestionSearchDTO;
+import com.green.nowon.domain.dto.ReviewDTO;
 import com.green.nowon.domain.entity.QuestionEntity;
 import com.green.nowon.domain.mapper.QuestionMapper;
 import com.green.nowon.domain.repository.QuestionEntityRepository;
@@ -30,6 +32,7 @@ public class QuestionServiceProcess implements QuestionService {
 	@Override
 	public void detail(long no, Model model) {
 		model.addAttribute("detail", mapper.findByNo(no));
+		model.addAttribute("review", mapper.reviewFindByno(no));
 	}
 
 	@Override
@@ -54,6 +57,17 @@ public class QuestionServiceProcess implements QuestionService {
 		int rowCount = (int)questRepo.count();
 		
 		model.addAttribute("pageData", PageData.create(page, limit, rowCount, 5));
+	}
+	
+	@Override
+	public void reviewSave(long no, ReviewDTO dto) {
+		mapper.saveAnswer(no, dto);
+	}
+
+	@Override
+	public void findByQuery(Model model, QuestionSearchDTO dto) {
+		model.addAttribute("list", mapper.findByQuery(dto));
+		
 	}
 
 }

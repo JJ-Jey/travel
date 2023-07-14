@@ -42,10 +42,14 @@ header{
 	font-weight: 700;
 }
 
+#member-box{
+	width: 300px;
+}
+
 #login{
-	width: 115px;
+	width: 2000px;
 }
 
 #logout{
-	width: 125px;
+	width: 220px;
 }

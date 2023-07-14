@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.nowon.restBoard.RestBoardMapper">
+	<select id="findAllByColName" resultType="com.green.nowon.restBoard.BoardSearchDTO">
+		select * from question
+		<where>
+			<if test="colName != null and query !=null">
+				${colName} like '%${query}%'
+			</if>
+		</where>
+		order by no desc
+	</select>
+	
+	<select id="findAllBySearch" resultType="com.green.nowon.restBoard.BoardSearchDTO">
+		select * from question
+		<where>
+			<if test="columnName !=0 and columnName == 1 or columnName == 3 or columnName == 5 or columnName == 7">
+				subject like '%${query}%'
+			</if>
+			<if test="columnName !=0 and columnName == 2 or columnName == 3 or columnName == 6 or columnName == 7">
+				or content like '%${query}%'
+			</if>
+			<if test="columnName !=0 and columnName == 4 or columnName == 5 or columnName == 6 or columnName == 7">
+				or writer like '%${query}%'
+			</if>
+		</where>
+		order by no desc
+	</select>
+	
+	<select id="coutAllBySearch" resultType="int">
+		select count(*) from question
+		<where>
+			<if test="columnName !=0 and columnName == 1 or columnName == 3 or columnName == 5 or columnName == 7">
+				subject like '%${query}%'
+			</if>
+			<if test="columnName !=0 and columnName == 2 or columnName == 3 or columnName == 6 or columnName == 7">
+				or content like '%${query}%'
+			</if>
+			<if test="columnName !=0 and columnName == 4 or columnName == 5 or columnName == 6 or columnName == 7">
+				or writer like '%${query}%'
+			</if>
+		</where>
+	</select>
+</mapper>

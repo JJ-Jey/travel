@@ -1,5 +1,6 @@
 package com.green.nowon.controller;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.green.nowon.domain.dto.QuestionSaveDTO;
+import com.green.nowon.domain.dto.QuestionSearchDTO;
+import com.green.nowon.domain.dto.ReviewDTO;
 import com.green.nowon.domain.entity.QuestionEntity;
 import com.green.nowon.domain.repository.QuestionEntityRepository;
 import com.green.nowon.service.QuestionService;
@@ -57,6 +60,18 @@ public class QuestionController {
 	public String questionDelete(@PathVariable long no) {
 		service.delete(no);
 		return "redirect:/questions";
+	}
+	
+	@PostMapping("/questions/{no}/review")
+	public String review(@PathVariable long no, @Param("ReviewDTO") ReviewDTO dto) {
+		service.reviewSave(no, dto);
+		return "redirect:/questions/"+no;
+	}
+	
+	@GetMapping("/questions/question-search")
+	public String search(Model model, QuestionSearchDTO dto) {
+		service.findByQuery(model, dto);
+		return "question/search";
 	}
 	
 }

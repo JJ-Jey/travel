@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.green.nowon.domain.dto.ItemSaveDTO;
+import com.green.nowon.domain.dto.VisualDTO;
 import com.green.nowon.service.FileUploadService;
 
 import lombok.RequiredArgsConstructor;
@@ -38,9 +38,9 @@ public class VisualController {
 	}
 	
 	@PostMapping("/admin/visuals/img")
-	public String save(ItemSaveDTO dto) {
+	public String save(VisualDTO dto) {
 		fileService.saveProcess(dto);
-		return "";
+		return "redirect:/admin/visuals";
 	}
 
 }

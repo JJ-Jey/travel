@@ -37,4 +37,12 @@
 	<select id="findByPno" resultType="com.green.nowon.domain.entity.PromotionEntity">
 		select * from promotion where pno = #{pno}
 	</select>
+	
+	<update id="update" parameterType="com.green.nowon.domain.entity.PromotionEntity">
+		update promotion set name = #{PromotionEntity.name}, content = #{PromotionEntity.content}, price = #{PromotionEntity.price}, period = #{PromotionEntity.period} where pno = #{PromotionEntity.pno}
+	</update>
+	
+	<delete id="delete">
+		delete from promotion where pno = #{pno}
+	</delete>
 </mapper>

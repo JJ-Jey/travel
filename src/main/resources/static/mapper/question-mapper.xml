@@ -26,4 +26,38 @@
 		delete from question where no = #{no}
 	</delete>
 	
+	<insert id="saveAnswer" parameterType="com.green.nowon.domain.dto.ReviewDTO">
+		insert into review(writer, content, no) values(#{ReviewDTO.writer}, #{ReviewDTO.content}, #{ReviewDTO.no})
+	</insert>
+	
+	<select id="reviewFindByno" resultType="com.green.nowon.domain.dto.ReviewDTO">
+		select * from review where no = #{no}
+	</select>
+	
+	<select id="findAllByColName" resultType="com.green.nowon.domain.entity.QuestionEntity">
+		select * from question
+		<where>
+			<if test="colName != null and query !=null">
+				${colName} like '%${query}%'
+			</if>
+		</where>
+		order by no desc
+	</select>
+	
+	<select id="findByQuery" resultType="com.green.nowon.domain.entity.QuestionEntity">
+		select * from question
+		<where>
+			<if test="columnName !=0 and columnName == 1 or columnName == 3 or columnName == 5 or columnName == 7">
+				or title like '%${query}%'
+			</if>
+			<if test="columnName !=0 and columnName == 2 or columnName == 3 or columnName == 6 or columnName == 7">
+				or content like '%${query}%'
+			</if>
+			<if test="columnName !=0 and columnName == 4 or columnName == 5 or columnName == 6 or columnName == 7">
+				or writer like '%${query}%'
+			</if>
+		</where>
+		order by no desc
+	</select>
+	
 </mapper>

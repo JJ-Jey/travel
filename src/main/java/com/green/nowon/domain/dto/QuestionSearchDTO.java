@@ -7,9 +7,9 @@ import lombok.Setter;
 @Getter
 public class QuestionSearchDTO {
 	
-	private String colName;
+	private String columnName;
 
-	private String search;
+	private String query;
 	
 	private int page=1;
 

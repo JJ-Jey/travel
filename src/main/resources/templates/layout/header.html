@@ -25,13 +25,16 @@
 				<div id="login" class="flex between" sec:authorize="isAnonymous()">
 					<p>비회원</p>
 			  		<a href="/sign/signin">로그인</a>
+			  		<div>
+						<a href="/sign/signup">회원가입</a>
+					</div>
 			    </div>
 
-			<div>
+			<div id="member-box">
 				<!-- 인증이 된 경우 출력 sec:authorize="isAuthenticated()" -->
-		        <div id="logout" class="flex between" sec:authorize="isAuthenticated()">
+		        <div id="logout" style="width: 270px;" class="flex between" sec:authorize="isAuthenticated()">
 
-			        <span th:text="${#authentication.name}"></span>
+			        <p th:text="${#authentication.name}"></p>
 
 			        <form action="/logout" method="post">
 			        	
@@ -43,14 +46,14 @@
 
 			        </form>
 
-		        </div>
-		        <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin">관리자 페이지</a>
-			</div>
-			
-			
 				<div>
 					<a href="/sign/signup">회원가입</a>
 				</div>
+		        </div>
+		        <a sec:authorize="hasRole('ROLE_ADMIN')" href="/admin">관리자 페이지</a>
+			
+			
+			</div>
 				
 			</section>		
 		

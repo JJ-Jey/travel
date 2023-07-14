@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
+	
+<head>
+	<th:block th:if="${_csrf}">
+		<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+		<meta name="_csrf" th:content="${_csrf.token}" />
+	</th:block>
+	<!-- include libraries(jQuery, bootstrap) -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	
+	<!-- include summernote css/js -->
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+	<script src="/js/registration.js"></script>
+
+	<link rel="stylesheet" href="/css/registration.css">
+</head>
+		
+<main>
+		<h1>상품 등록 페이지</h1>
+		<div class="wrap view-size">
+			<section id=registration>
+				<div class="wrap">
+					<p class="tit">상품등록 페이지</p>
+
+					<form action="/products" method="post" onsubmit="return checkOk()">
+						<p>
+							<input type="text" name="title" class="title" id="title" placeholder="제품명">
+						</p>
+						<p>
+							<input type="text" name="price" id="price" placeholder="가격">
+						</p>
+						<p id="temp-imgs-wrap">
+							<!-- 
+							<span>
+								<label for="def" class="img-area">+</label>
+								<input type="file" id="def" name="imgs" onchange="tempUpload(this)">
+								<input type="hidden" class="temp-key" name="tempKey">
+							</span>
+							 -->
+							<!-- 여기에 추가로 태그가 들어가면되요 -->
+						</p>
+						<p>
+							<textarea id="summernote" name="content"></textarea>
+						</p>
+						<p>
+							<button type="submit">상품등록</button>
+							<span id="msg"></span>
+						</p>
+					</form>
+				</div>
+				
+			</section>
+		</div>
+</main>
+
+</html>

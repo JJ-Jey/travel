@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout/layout :: basic(~{::head},~{::main})">
+
+	<head>
+		<link rel="stylesheet" href="/css/product/list.css">
+		<!-- 타임리프는 자바스크립트가 외부로 링크되어있을 경우 적용되지 않음. 인라인만 가능. -->
+		<script th:inline="javascript">
+			
+			/* controller에서 설정한 query string parameter 가져오기 */
+			var page = /*[[${param.page}]]*/
+			
+			$(function(){
+				
+				/* page 기본값 설정 */
+				if(page==null || page=="")page=1;
+				
+				/* page 배열: 총 페이지 개수만큼 */
+				var pageList = $(".page-wrap a");
+				
+				/* eq(): index >> 현재 페이지에 target class 부여 */
+				pageList.eq(page-1).addClass("target");
+				
+			});
+			
+		</script>
+	</head>
+
+	<main>
+		<h1>메인영역</h1>
+		
+		<div class="wrap view-size">
+			<section id="products">
+				<h1>상품등록</h1>
+				<div class="wrap">
+					<p class="tit">상품 리스트</p>
+					<div class="flex end" sec:authorize="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">
+						<a class="registration" href="/registration">상품등록</a>
+					</div>
+					
+					
+					<table>
+					<tr>
+						<td>상품번호</td>
+						<td>판매자</td>
+						<td>이미지</td>
+						<td>상품명</td>
+						<td>가격</td>
+						<td>등록일</td>
+					</tr>
+					
+					<tr class="flex center none-list" th:if="${#lists.isEmpty(list)}">
+						<td colspan="6">게시글이 존재하지 않습니다.</td>
+					</tr>
+					
+					<tr th:each="dto : ${list}">
+						<td th:text="${dto.pno}">상품번호</td>
+						<td th:text="${dto.seller}">판매자</td>
+						<td>
+							<img alt="(이미지)" th:src="${dto.defUrl}" width="100px">
+						</td>
+						<td>
+							<a th:href="|/products/${dto.pno}|" th:text="${dto.title}"></a>
+						</td>
+						<td th:text="${dto.price}">가격</td>
+						<td th:text="${dto.updatedDate}">등록일</td>
+					</tr>
+					
+				</table>
+					<div class="page-wrap flex center">
+					<th:block th:each="no : ${#numbers.sequence(1, tot)}">
+						<!-- query string parameter: ? >> ? 뒤에는 url 주소가 아닌, 넘어가는 데이터-->
+						<a th:if="${no}!=0" th:href="@{|/products?page=${no}|}" th:text="${no}">페이지 번호</a>
+					</th:block>
+					</div>
+				</div>
+			</section>
+		</div>
+	</main>
+
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="layout/layout :: basic(~{::head}, ~{::main})">
+
+<head>
+<link rel="stylesheet" href="/css/admin/detail.css">
+<!-- include libraries(jQuery, bootstrap) -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- include summernote css/js -->
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+<!-- jquery summernote 사용하기 -->
+<script type="text/javascript">
+	$(function() {
+		$('#summernote').summernote();
+	});
+
+	/* 수정 버튼 누르면 수정 화면으로 변경 */
+	function clickedBtnUpdate() {
+		/* show()는 display가 block으로 설정되기 때문에 flex를 주기 위해서 css로 설정 */
+		$(".detail-update").css("display", "flex");
+		$(".detail-default").hide();
+	}
+
+	function clickedBtnCancel() {
+		$(".detail-update").hide();
+		$(".detail-default").show();
+	}
+</script>
+</head>
+
+<main>
+	<h1>메인 영역</h1>
+	<div class="warp view-size">
+
+		<section id="detail">
+			<h1>프로모션 내용</h1>
+			<div class="wrap">
+
+				<dl class="flex">
+					<dt>프로모션 번호</dt>
+					<dd th:text="${detail.pno}"></dd>
+				</dl>
+				<dl class="flex">
+					<dt>작성일</dt>
+					<dd th:text="${detail.updatedDate}"></dd>
+				</dl>
+
+				<form th:action="|/admin/promotions/${detail.pno}|" method="post">
+					<dl class="flex">
+						<dt>제목</dt>
+						<dd>
+							<div class="detail-default">
+								<span th:text="${detail.name}"></span>
+							</div>
+							<div class="detail-update">
+								<input type="text" name="name"
+									style="border: 1px solid #999; padding: 5px;"
+									th:value="${detail.name}">
+							</div>
+						</dd>
+					</dl>
+					<dl class="flex">
+						<dt>상품 이미지</dt>
+						<dd>
+							<th:block th:each="img:${files}">
+								<div class="detail-default">
+									<img alt="(이미지)" th:src="${img}" width="100px">
+								</div>
+							</th:block>
+							<div class="detail-update">
+								<img alt="(이미지)" th:src="${img}" width="100px">
+							</div>
+						</dd>
+					</dl>
+					<dl class="flex">
+						<dt>프로모션 기간</dt>
+						<dd>
+							<div class="detail-default">
+								<span th:text="${detail.period}"></span>
+							</div>
+							<div class="detail-update">
+								<input type="text" name="period"
+									style="border: 1px solid #999; padding: 5px;"
+									th:value="${detail.period}">
+							</div>
+						</dd>
+					</dl>
+					<dl class="flex">
+						<dt>프로모션 가격</dt>
+						<dd>
+							<div class="detail-default">
+								<span th:text="${detail.price}"></span>
+							</div>
+							<div class="detail-update">
+								<input type="text" name="price"
+									style="border: 1px solid #999; padding: 5px;"
+									th:value="${detail.price}">
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt class="content-detail">상세정보</dt>
+						<dd>
+							<div class="detail-default" th:utext="${detail.content}"></div>
+							<div class="detail-update">
+								<textarea id="summernote" name="content">[(${detail.content})]</textarea>
+							</div>
+						</dd>
+					</dl>
+
+
+					<div class="detail-update flex center">
+						<button type="button" onclick="clickedBtnCancel()">취소</button>
+						<input type="hidden" name="_method" value="put">
+						<button>수정 완료</button>
+					</div>
+				</form>
+
+				<div id="btns" class="detail-default flex center">
+					<a href="/admin/promotions">
+						<button type="button">목록</button>
+					</a>
+
+					<!-- onclick 속성은 ()호출 형식으로 입력하기 -->
+					<th:block sec:authorize="hasRole('ROLE_ADMIN')">
+						<button type="button" onclick="clickedBtnUpdate()">수정</button>
+
+						<form th:action="|/admin/promotions/${detail.pno}|" method="post">
+							<input type="hidden" name="_method" value="patch">
+							<button class="del" type="submit">삭제</button>
+						</form>
+					</th:block>
+
+				</div>
+
+				<!-- <p>프로모션 정보</p>
+				
+				<dl class="flex">
+					<dt>프로모션 번호</dt>
+					<dd th:text="${detail.pno}"></dd>
+				</dl>
+				
+				<dl class="flex">
+					<dt>프로모션</dt>
+					<dd th:text="${detail.name}"></dd>
+				</dl>
+				<dl class="flex">
+					<dt>가격</dt>
+					<dd th:text="${detail.price}"></dd>
+				</dl>
+				<dl class="flex">
+					<dt>기간</dt>
+					<dd th:text="${detail.period}"></dd>
+				</dl>
+				<dl class="flex">
+					<dt>등록일</dt>
+					<dd th:text="${detail.updatedDate}"></dd>
+				</dl>
+				
+				
+				<form th:action="|/admin/flights/${detail.pno}|" method="post">
+				
+					<dl class="flex">
+						<dt>제목</dt>
+						<dd>
+							<div class="detail-default">
+								<span th:text="${detail.name}"></span>
+							</div>
+							<div class="detail-update">
+								<input type="text" name="name" th:value="${detail.name}">
+							</div>
+						</dd>
+					</dl>
+					
+					<dl class="flex">
+						<dt>가격</dt>
+						<dd>
+							<div class="detail-default">
+								<span th:text="${detail.price}"></span>
+							</div>
+							<div class="detail-update">
+								<input type="text" name="price" th:value="${detail.price}">
+							</div>
+						</dd>
+					</dl>
+
+					
+					<dl class="flex">
+						<dt>상품 이미지</dt>
+						<dd>
+						<th:block th:each="img:${files}">
+							<div class="detail-default">
+								<img alt="(이미지)" th:src="${img}" width="100px">
+							</div>
+						</th:block>
+							<div class="detail-update">
+								<img alt="(이미지)" th:src="${img}" width="100px">
+							</div>
+						</dd>
+					</dl>
+					
+					 
+					<dl>
+						<dt>상세 정보</dt>
+						<dd>
+							<div class="detail-default" th:utext="${detail.content}"></div>
+							<div class="detail-update">
+								<textarea id="summernote" name="content">[(${detail.content})]</textarea>
+							</div>
+						</dd>
+					</dl>
+					
+					<div class="detail-update flex center">
+						<button type="button" onclick="clickedBtnCancel()">취소</button>
+						<input type="hidden" name="_method" value="put">
+						<button type="submit">수정 완료</button>
+					</div>
+				</form>
+				
+				<div class="detail-default flex center">
+					<a href="/products">
+						<button type="button">목록</button>
+					</a>
+					
+					<button type="button" onclick="clickedBtnUpdate()">수정</button>
+
+					<form th:action="|/admin/flights/${detail.pno}|" method="post">
+						<input type="hidden" name="_method" value="DELETE">
+						<button type="submit">삭제</button>
+					</form>
+	
+				</div> -->
+			</div>
+		</section>
+
+	</div>
+</main>
+
+</html>

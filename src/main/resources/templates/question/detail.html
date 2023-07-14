@@ -1,117 +1,163 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="//www.thymeleaf.org/extras/spring-security"
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="//www.thymeleaf.org/extras/spring-security"
 	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
 <head>
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-	
-	<link rel="stylesheet" href="/css/question/list.css">
-	
-	<script type="text/javascript">
-		$(function(){
-			$('#summernote').summernote();
-		});
-		
-		function clickedBtnUpdate(){
-			$(".detail-update").css("display", "flex");
-			$(".detail-default").hide();
-		}
-		
-		function clickedBtnCancel(){
-			$(".detail-update").hide();
-			$(".detail-default").show();
-		}
-	</script>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+<link rel="stylesheet" href="/css/question/detail.css">
+
+<script type="text/javascript">
+	$(function() {
+		$('#summernote').summernote();
+	});
+
+	function clickedBtnUpdate() {
+		$(".detail-update").css("display", "flex");
+		$(".detail-default").hide();
+	}
+
+	function clickedBtnCancel() {
+		$(".detail-update").hide();
+		$(".detail-default").show();
+	}
+</script>
 </head>
 <main>
 	<h1>메인영역</h1>
 	<div class="wrap view-size">
-		<p>QnA 게시판</p>
-		
-		<a href="/questions/new">문의하기</a>
-		
+		<p class="page-title">QnA</p>
+
 		<h1>메인 영역</h1>
 		<div class="warp view-size">
-		
-		<section id="detail">
-			<h1>게시글 내용</h1>
-			<div class="wrap">
-				<p class="tit">상세 정보</p>
-				
-				<dl class="flex">
-					<dt>글번호</dt>
-					<dd th:text="${detail.no}"></dd>
-				</dl>
-				<dl class="flex">
-					<dt>작성일</dt>
-					<!-- <dd th:text="${detail.createdDate}"></dd> -->
-				</dl>
-				<dl class="flex">
-					<dt>작성자</dt>
-					<dd th:text="${detail.writer}"></dd>
-				</dl>
-				
-				<form th:action="|/questions/${detail.no}|" method="post">
+
+			<section id="detail">
+				<h1>게시글 내용</h1>
+				<div class="wrap">
 					<dl class="flex">
-						<dt>제목</dt>
-						<dd>
-							<div class="detail-default">
-								<span th:text="${detail.title}"></span>
-							</div>
-							<div class="detail-update">
-								<input type="text" name="title" th:value="${detail.title}">
-							</div>
-						</dd>
+						<dt>글번호</dt>
+						<dd th:text="${detail.no}"></dd>
 					</dl>
-					<dl>
-						<dt>상세정보</dt>
-						<dd>
-							<div class="detail-default" th:utext="${detail.content}"></div>
-							<div class="detail-update">
-								<textarea id="summernote" name="content">[(${detail.content})]</textarea>
-							</div>
-						</dd>
+					<dl class="flex">
+						<dt>작성일</dt>
+						<dd th:text="${detail.createdDate}"></dd>
 					</dl>
-					
-					
-					<div class="detail-update flex center">
-						<button type="button" onclick="clickedBtnCancel()">취소</button>
-						<input type="hidden" name="_method" value="put">
-						<button type="submit">수정 완료</button>
+					<dl class="flex">
+						<dt>작성자</dt>
+						<dd th:text="${detail.writer}"></dd>
+					</dl>
+
+					<form th:action="|/questions/${detail.no}|" method="post">
+						<dl class="flex">
+							<dt>제목</dt>
+							<dd>
+								<div class="detail-default">
+									<span th:text="${detail.title}"></span>
+								</div>
+								<div class="detail-update">
+									<input type="text" name="title"
+										style="border: 1px solid #999; padding: 5px;"
+										th:value="${detail.title}">
+								</div>
+							</dd>
+						</dl>
+						<dl>
+							<dt class="content-detail">상세정보</dt>
+							<dd>
+								<div class="detail-default" th:utext="${detail.content}"></div>
+								<div class="detail-update">
+									<textarea id="summernote" name="content">[(${detail.content})]</textarea>
+								</div>
+							</dd>
+						</dl>
+
+
+						<div class="detail-update flex center">
+							<button type="button" onclick="clickedBtnCancel()">취소</button>
+							<input type="hidden" name="_method" value="put">
+							<button type="submit">수정 완료</button>
+						</div>
+					</form>
+
+					<div id="btns" class="detail-default flex center">
+						<a href="/questions">
+							<button type="button">목록</button>
+						</a>
+
+						<!-- onclick 속성은 ()호출 형식으로 입력하기 -->
+						<th:block th:if="${#authentication.name == detail.writer}">
+							<!-- <th:block th:if="sessionScope.userId == detail.writer"> -->
+							<button type="button" onclick="clickedBtnUpdate()">수정</button>
+						</th:block>
+
+						<!-- th:if="${#authorization.expression()}" -->
+						<th:block
+							th:if="${#authentication.name == detail.writer && detail.writer != 'admin'}">
+							<form th:action="|/questions/${detail.no}|" method="post">
+								<input type="hidden" name="_method" value="DELETE">
+								<button class="del" type="submit">삭제</button>
+							</form>
+						</th:block>
+
+						<!-- 관리자 삭제 버튼 -->
+						<th:block sec:authorize="hasRole('ROLE_ADMIN')">
+							<form th:action="|/questions/${detail.no}|" method="post">
+								<input type="hidden" name="_method" value="patch">
+								<button class="del" type="submit">삭제</button>
+							</form>
+						</th:block>
+
 					</div>
-				</form>
-				
-				<div class="detail-default flex center">
-					<a href="/questions">
-						<button type="button">목록</button>
-					</a>
-					
-					<!-- onclick 속성은 ()호출 형식으로 입력하기 -->
-					<th:block th:if="${#authentication.name == detail.writer}">
-					<!-- <th:block th:if="sessionScope.userId == detail.writer"> -->
-						<button type="button" onclick="clickedBtnUpdate()">수정</button>
-					</th:block>
-					<!-- th:if="${#authorization.expression()}" -->
-					<th:block th:if="${#authentication.name == detail.writer}">
-						<form th:action="|/questions/${detail.no}|" method="post">
-							<input type="hidden" name="_method" value="DELETE">
-							<button type="submit">삭제</button>
-						</form>
-					</th:block>
-					
-					<!-- 관리자 삭제 버튼 -->
-					<th:block sec:authorize="hasRole('ROLE_ADMIN')">
-						<form th:action="|/questions/${detail.no}|" method="post">
-							<input type="hidden" name="_method" value="patch">
-							<button type="submit">삭제</button>
-						</form>
-					</th:block>
-					
+
+						<!--                       답변                       -->
+					<section style="margin-top: 20px; border-top: 5px double #666; width: 100%; padding-top: 20px;" class="detail-default">
+						<p class="tit">답변</p>
+
+						<div th:if="${#lists.isEmpty(review)}">
+							<span>문의 사항을 확인 중입니다. 답변을 기다려주세요.</span>
+						</div>
+
+						<div class="wrap" th:each="review : ${review}">
+
+							<dl class="flex">
+								<dt>작성자</dt>
+								<dd th:text="${review.writer}"></dd>
+								<dd th:text="|(${review.createdDate})|"></dd>
+							</dl>
+
+							<dl class="flex">
+								<dd th:text="${review.content}"></dd>
+							</dl>
+						</div>
+
+						<!--                       답변 입력                    -->
+						<th:block sec:authorize="hasRole('ROLE_ADMIN')">
+							<form th:action="|/questions/${detail.no}/review|" method="post">
+								<input
+									style="margin-top: 20px; border-top: 5px double #666; width: 100%; padding-top: 10px;"
+									type="text" name="writer" th:value="관리자" disabled="disabled"
+									required="required"> <br> <input
+									style="width: 100%; height: 150px; margin-top: 10px; border-radius: 10px; border: 1px solid #999;"
+									type="text" name="content" placeholder="답변 입력"
+									required="required"> <br>
+								<button
+									style="border-radius: 5px; padding: 10px; margin-top: 10px; background-color: #f99; color: white;"
+									type="submit">답변 등록</button>
+							</form>
+						</th:block>
+					</section>
+
 				</div>
-			</div>
-		</section>
+			</section>
 		</div>
 	</div>
 </main>

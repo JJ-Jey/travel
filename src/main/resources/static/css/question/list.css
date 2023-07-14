@@ -12,8 +12,31 @@
 	margin-left: 85%;
 }
 
+#form-search{
+	text-align: center;
+	margin-top: 100px;
+}
+
+#form-search input{
+	border-bottom: 1px solid #999;
+	margin: 0 20px;
+	font-size: 18px;
+	padding-bottom: 5px;
+}
+
+#form-search button{
+	background-color: #888;
+	padding: 10px;
+	border-radius: 10px;
+	color: white;
+}
+
+#form-search button:hover{
+	background-color: #333;
+}
+
 #question-list{
-	margin: 100px auto;
+	margin: 20px auto;
 	width: 800px;
 	height: 700px;
 }
@@ -53,21 +76,22 @@
 /* 버튼 */
 
 .page-btn{
+	margin-top: 100px;
 	margin-left: 600px;
 }
 
 .page-btn a{
 	display: inline-flex;
-	padding-top: 12px;
-	padding-left: 18px;
-	width: 50px;
-	height: 50px;
-	border: 1px solid black;
+	padding-top: 3.5px;
+	padding-left: 8.5px;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #a9a9a9;
 	border-radius: 50%;
 	margin: 0 3px;
 }
 
 .page-btn a:hover {
-	background-color: #333;
+	background-color: #a9a9a9;
 	color: #fff;
 }

@@ -4,13 +4,13 @@
 	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
 
 	<head>
-		
+		<link rel="stylesheet" href="/css/admin/promotion.css">
 	</head>
 
 	<main>
 		<h1>메인영역</h1>
-		<div class="wrap view-size">
-			<p>상품 리스트</p>
+		<p class="page-title">프로모션 리스트</p>
+		<div id="promotion-list" class="wrap view-size">
 			<table>
 				<tr>
 					<td>대표이미지</td>
@@ -27,10 +27,10 @@
 				</tr>
 				<tr th:if="${!#lists.isEmpty(list)}" th:each="dto : ${list}">
 					<td>
-						<img alt="img" src="/image/example/vote9.jpg" width="100px">
+						<img alt="img" src="/image/example/vote3.jpg" width="100px">
 					</td>
 					<td>
-						<a th:href="|/admin/flights/${dto.pno}|" th:text="${dto.name}">제목</a>
+						<a th:href="|/admin/promotions/${dto.pno}|" th:text="${dto.name}">제목</a>
 					</td>
 					<td th:text="${dto.price}">가격</td>
 					<td th:text="${dto.period}">기간</td>

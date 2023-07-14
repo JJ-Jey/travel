@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
 	<head>
-		<meta name="_csrf_parameter" content="${_csrf.parameterName}" />
-		<meta name="_csrf_header" content="${_csrf.headerName}" />
-		<meta name="_csrf" content="${_csrf.token}" />
-		
+	<th:block th:if="${_csrf}">
+		<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+		<meta name="_csrf" th:content="${_csrf.token}" />
+	</th:block>
 		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 		<script src="/js/admin/fileupload.js"></script>
 		<link rel="stylesheet" href="/css/admin/fileupload.css"/>
