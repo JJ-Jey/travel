@@ -4,6 +4,10 @@
 	th:replace="~{ layout/layout :: basic(~{::head}, ~{::main}) }">
 	
 <head>
+	<th:block th:if="${_csrf}">
+		<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+		<meta name="_csrf" th:content="${_csrf.token}" />
+	</th:block>
 	<!-- include libraries(jQuery, bootstrap) -->
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -22,14 +26,17 @@
 		<div class="wrap view-size">
 			<section id=registration>
 				<div class="wrap">
-					<p class="tit">상품등록 페이지</p>
+					<p class="tit">프로모션 등록 페이지</p>
 
-					<form action="/products" method="post" onsubmit="return checkOk()">
+					<form action="/admin/promotions" method="post" onsubmit="return checkOk()">
 						<p>
-							<input type="text" name="title" class="title" id="title" placeholder="제품명">
+							<input type="text" name="name" class="name" id="name" placeholder="프로모션명">
 						</p>
 						<p>
-							<input type="text" name="price" id="price" placeholder="가격">
+							<input type="text" name="price" id="price" placeholder="프로모션 가격">
+						</p>
+						<p>
+							<input type="text" name="period" id="period" placeholder="프로모션 기간">
 						</p>
 						<p id="temp-imgs-wrap">
 							<!-- 
@@ -45,7 +52,8 @@
 							<textarea id="summernote" name="content"></textarea>
 						</p>
 						<p>
-							<button type="submit">상품등록</button>
+							<input type="hidden" th:if="${_csrf}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+							<button type="submit">프로모션 등록</button>
 							<span id="msg"></span>
 						</p>
 					</form>

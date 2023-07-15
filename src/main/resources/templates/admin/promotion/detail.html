@@ -71,13 +71,11 @@
 						</dd>
 					</dl>
 					<dl class="flex">
-						<dt>상품 이미지</dt>
+						<dt>프로모션 이미지</dt>
 						<dd>
-							<th:block th:each="img:${files}">
-								<div class="detail-default">
-									<img alt="(이미지)" th:src="${img}" width="100px">
-								</div>
-							</th:block>
+							<div class="detail-default" th:each="img:${files}">
+								<img alt="(이미지)" th:src="${img}" width="100px">
+							</div>
 							<div class="detail-update">
 								<img alt="(이미지)" th:src="${img}" width="100px">
 							</div>

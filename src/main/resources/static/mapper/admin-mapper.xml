@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.nowon.domain.mapper.AdminMapper">
 	<select id="findAll" resultType="com.green.nowon.domain.entity.PromotionEntity">
-		select * from promotion
+		select * from promotion order by pno desc
 	</select>
 	
 	<resultMap id="promotionEntity" type="com.green.nowon.domain.entity.PromotionEntity">
@@ -27,11 +27,12 @@
 		</collection>
 	</resultMap>
 	
-	<select id="findAllJoinImage" resultMap="promotionEntity">
+	<select id="findByAllJoinFile" resultMap="promotionEntity">
 		select p.*,pi.* from 
 		promotion p LEFT JOIN promotion_image pi
 		ON p.pno = pi.pno
 		order by p.pno desc
+		limit #{offset}, #{limit}
 	</select>
 	
 	<select id="findByPno" resultType="com.green.nowon.domain.entity.PromotionEntity">
@@ -45,4 +46,15 @@
 	<delete id="delete">
 		delete from promotion where pno = #{pno}
 	</delete>
+	
+	<insert id="savePromotion">
+		<selectKey order="AFTER" keyProperty="pno" resultType="long">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		insert into promotion(name, price, content, period) values(#{name}, #{price}, #{content}, #{period})
+	</insert>
+	
+	<select id="findByAll" resultType="com.green.nowon.domain.entity.PromotionEntity">
+		select * from promotion order by pno desc limit #{offset}, #{limit}
+	</select>
 </mapper>

@@ -11,15 +11,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import groovy.transform.ToString;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
+@ToString
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Table(name = "promotion")
 @Entity
 public class PromotionEntity extends BaseDateEntity {
