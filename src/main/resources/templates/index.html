@@ -116,12 +116,12 @@
 					<a href="">전체보기 +</a>
 				</div>
 				
-				<div class="flex around">
-					<th:block th:each="i : ${#numbers.sequence(1,3)}">
-						<ul class="event" th:style="|background-image: url('/image/example/vote${i}.jpg');|">
-							<li>상품명</li>
-							<li>상품 가격</li>
-							<li>상품 기간</li>
+				<div class="grid-container">
+					<th:block th:each="dto, iState:${list}">
+						<ul class="event" th:if="${iState.index<3}" th:style="|background-image: url('${dto.defUrl}');|">
+							<li th:text="${dto.name}">상품명</li>
+							<li th:text="${#numbers.formatCurrency(dto.price)}">상품 가격</li>
+							<li th:text="${dto.period}">상품 기간</li>
 						</ul>
 					</th:block>
 				</div>
@@ -137,12 +137,12 @@
 					<a href="">전체보기 +</a>
 				</div>
 				
-				<div class="flex around">
-					<th:block th:each="i : ${#numbers.sequence(4,6)}">
-						<ul class="event" th:style="|background-image: url('/image/example/vote${i}.jpg');|">
-							<li>상품명</li>
-							<li>상품 가격</li>
-							<li>상품 기간</li>
+				<div class="grid-container">
+					<th:block th:each="dto, iState:${list}">
+						<ul class="event" th:if="${iState.index>=3}" th:style="|background-image: url('${dto.defUrl}');|">
+							<li th:text="${dto.name}">상품명</li>
+							<li th:text="${#numbers.formatCurrency(dto.price)}">상품 가격</li>
+							<li th:text="${dto.period}">상품 기간</li>
 						</ul>
 					</th:block>
 				</div>

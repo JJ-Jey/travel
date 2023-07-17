@@ -17,6 +17,7 @@ import com.green.nowon.domain.entity.PromotionEntity;
 import com.green.nowon.domain.entity.PromotionImageEntity;
 import com.green.nowon.domain.mapper.AdminMapper;
 import com.green.nowon.domain.mapper.PromotionImageMapper;
+import com.green.nowon.domain.repository.PromotionRepository;
 import com.green.nowon.service.AdminService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,8 @@ public class AdminServiceProcess implements AdminService {
 	private final AdminMapper mapper;
 	
 	private final PromotionImageMapper imageMapper;
+	
+	private final PromotionRepository repo;
 	
 	@Override
 	public void findAll(Model model) {
@@ -95,7 +98,7 @@ public class AdminServiceProcess implements AdminService {
 
 	@Override
 	public void listJoinProcess(int page, Model model) {
-		int limit = 5; //한 페이지에 표현할 행 개수
+		int limit = 6; //한 페이지에 표현할 행 개수
 		int offset = (page - 1) * limit; //행 시작 위치
 		PageData data = PageData.builder()
 				.limit(limit).offset(offset)
@@ -118,9 +121,13 @@ public class AdminServiceProcess implements AdminService {
 		model.addAttribute("list", mapper.findByAllJoinFile(data).stream()
 				.map(PromotionListDTO::new)
 				.collect(Collectors.toList()));
-		
-		String path = "//s3.ap-northeast-2.amazonaws.com/myweb.fileupload.bucket/visual/images/";
-		model.addAttribute("files", path + imageMapper.findByPnoAndDefYn(10));
+	}
+
+	@Override
+	public void listJoinProcess(Model model) {
+		model.addAttribute("list", mapper.findByJoinFile().stream()
+				.map(PromotionListDTO::new)
+				.collect(Collectors.toList()));
 	}
 
 }

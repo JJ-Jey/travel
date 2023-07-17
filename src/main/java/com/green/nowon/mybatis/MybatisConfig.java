@@ -2,6 +2,7 @@ package com.green.nowon.mybatis;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.logging.stdout.StdOutImpl;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -62,7 +63,9 @@ public class MybatisConfig {
 	@Bean
 	@ConfigurationProperties(prefix = "mybatis.configuration")
 	org.apache.ibatis.session.Configuration mybatisConfiguration() {
-		return new org.apache.ibatis.session.Configuration();
+		org.apache.ibatis.session.Configuration ccc=new org.apache.ibatis.session.Configuration();
+		ccc.setLogImpl(StdOutImpl.class);
+		return ccc;
 	}
 
 	@Bean

@@ -72,12 +72,12 @@
 					</dl>
 					<dl class="flex">
 						<dt>프로모션 이미지</dt>
-						<dd>
-							<div class="detail-default" th:each="img:${files}">
-								<img alt="(이미지)" th:src="${img}" width="100px">
+						<dd th:each="img:${detail.images}">
+							<div class="detail-default" >
+								<img alt="(이미지)" th:src="${'//s3.ap-northeast-2.amazonaws.com/myweb.fileupload.bucket/visual/images/'+img.newName}" width="100px">
 							</div>
 							<div class="detail-update">
-								<img alt="(이미지)" th:src="${img}" width="100px">
+								<img alt="(이미지)" th:src="${'//s3.ap-northeast-2.amazonaws.com/myweb.fileupload.bucket/visual/images/'+img.newName}" width="100px">
 							</div>
 						</dd>
 					</dl>

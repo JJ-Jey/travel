@@ -26,6 +26,12 @@ public class AdminController {
 	
 	private final AdminService service;
 	
+	@GetMapping("/")
+	public String home(Model model) {
+		service.listJoinProcess(model);
+		return "index";
+	}
+	
 	@GetMapping("/admin")
 	public String admin(Model model) {
 		return "admin/main";

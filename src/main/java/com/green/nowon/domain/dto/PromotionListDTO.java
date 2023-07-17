@@ -33,7 +33,7 @@ public class PromotionListDTO {
 		this.updatedDate = e.getUpdatedDate();
 		
 		if(e.getImages()!=null) {
-			String path="//s3.ap-northeast-2.amazonaws.com/myweb.fileupload.bucket/promotion/images/";
+			String path="//s3.ap-northeast-2.amazonaws.com/myweb.fileupload.bucket/visual/images/";
 			defUrl= path+e.getImages().get(0).getNewName();
 		}
 		

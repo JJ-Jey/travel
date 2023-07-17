@@ -1,5 +1,6 @@
 package com.green.nowon.domain.mapper;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -33,5 +34,7 @@ public interface AdminMapper {
 	List<PromotionEntity> findByAllJoinFile(PageData data);
 
 	List<PromotionEntity> findByAll(PageData data);
+
+	List<PromotionEntity> findByJoinFile();
 
 }

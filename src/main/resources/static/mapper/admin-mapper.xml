@@ -35,12 +35,15 @@
 		limit #{offset}, #{limit}
 	</select>
 	
-	<select id="findByPno" resultType="com.green.nowon.domain.entity.PromotionEntity">
-		select * from promotion where pno = #{pno}
+	<select id="findByPno" resultMap="promotionEntity">
+		select p.*,pi.* from 
+		promotion p LEFT JOIN promotion_image pi
+		ON p.pno = pi.pno
+		where p.pno=#{pno}
 	</select>
 	
 	<update id="update" parameterType="com.green.nowon.domain.entity.PromotionEntity">
-		update promotion set name = #{PromotionEntity.name}, content = #{PromotionEntity.content}, price = #{PromotionEntity.price}, period = #{PromotionEntity.period} where pno = #{PromotionEntity.pno}
+		update promotion set name = #{PromotionEntity.name}, content = #{PromotionEntity.content}, price = #{PromotionEntity.price}, period = #{PromotionEntity.period} where pno = #{pno}
 	</update>
 	
 	<delete id="delete">
@@ -56,5 +59,11 @@
 	
 	<select id="findByAll" resultType="com.green.nowon.domain.entity.PromotionEntity">
 		select * from promotion order by pno desc limit #{offset}, #{limit}
+	</select>
+	
+	<select id="findByJoinFile" resultMap="promotionEntity">
+		select p.*,f.* from promotion p 
+		LEFT JOIN promotion_image f
+		ON p.pno = f.pno
 	</select>
 </mapper>

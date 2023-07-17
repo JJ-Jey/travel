@@ -24,4 +24,6 @@ public interface AdminService {
 
 	void listJoinProcess(int page, Model model);
 
+	void listJoinProcess(Model model);
+
 }
